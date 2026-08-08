@@ -97,6 +97,65 @@ router.post('/anunturi/:id/toggle', requireAuth, async (req, res) => {
   res.redirect('/admin/anunturi');
 });
 
+// ── ARTICOLE ──────────────────────────────────────────────────────────────────
+router.get('/articole', requireAuth, async (req, res) => {
+  const { rows } = await pool.query(`SELECT id, title, category, published_at, is_visible FROM articles ORDER BY published_at DESC`);
+  res.render('admin/articole', { title: 'Gestionare Articole', articles: rows, editing: null });
+});
+
+router.get('/articole/:id/edit', requireAuth, async (req, res) => {
+  const { rows: all } = await pool.query(`SELECT id, title, category, published_at, is_visible FROM articles ORDER BY published_at DESC`);
+  const { rows } = await pool.query(`SELECT * FROM articles WHERE id=$1`, [req.params.id]);
+  if (!rows.length) return res.redirect('/admin/articole');
+  res.render('admin/articole', { title: 'Editare Articol', articles: all, editing: rows[0] });
+});
+
+router.post('/articole', requireAuth, async (req, res) => {
+  const { title, slug, category, excerpt, content, featured_image } = req.body;
+  const genSlug = slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  
+  try {
+    await pool.query(
+      `INSERT INTO articles (title, slug, category, excerpt, content, featured_image, meta_title, meta_description, created_by)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
+      [title, genSlug, category || 'General', excerpt || '', content || '', featured_image || '', title, excerpt || '', req.session.user.id]
+    );
+    flash(req, 'success', 'Articol adăugat cu succes!');
+  } catch(err) {
+    console.error(err);
+    flash(req, 'error', 'Eroare la adăugarea articolului (posibil slug duplicat).');
+  }
+  res.redirect('/admin/articole');
+});
+
+router.post('/articole/:id/update', requireAuth, async (req, res) => {
+  const { title, slug, category, excerpt, content, featured_image, is_visible, meta_title, meta_description } = req.body;
+  const genSlug = slug || title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  
+  try {
+    await pool.query(
+      `UPDATE articles SET title=$1, slug=$2, category=$3, excerpt=$4, content=$5, featured_image=$6, is_visible=$7, meta_title=$8, meta_description=$9 WHERE id=$10`,
+      [title, genSlug, category || 'General', excerpt || '', content || '', featured_image || '', !!is_visible, meta_title || title, meta_description || excerpt, req.params.id]
+    );
+    flash(req, 'success', 'Articol actualizat!');
+  } catch(err) {
+    console.error(err);
+    flash(req, 'error', 'Eroare la actualizarea articolului.');
+  }
+  res.redirect('/admin/articole');
+});
+
+router.post('/articole/:id/delete', requireAuth, async (req, res) => {
+  await pool.query(`DELETE FROM articles WHERE id=$1`, [req.params.id]);
+  flash(req, 'success', 'Articol șters.');
+  res.redirect('/admin/articole');
+});
+
+router.post('/articole/:id/toggle', requireAuth, async (req, res) => {
+  await pool.query(`UPDATE articles SET is_visible = NOT is_visible WHERE id=$1`, [req.params.id]);
+  res.redirect('/admin/articole');
+});
+
 // ── COMISII + PROFESORI ───────────────────────────────────────────────────────
 router.get('/comisii', requireAuth, async (req, res) => {
   const { rows: commissions } = await pool.query(`SELECT * FROM commissions ORDER BY display_order,id`);

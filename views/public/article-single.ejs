@@ -1,0 +1,90 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<main>
+  <!-- Hero Section for Article -->
+  <section class="page-hero" style="padding-bottom: 80px;">
+    <div class="container" style="max-width: 800px; margin: 0 auto;">
+      <div class="page-hero-breadcrumb">
+        <a href="/">Acasă</a>
+        <span>/</span>
+        <a href="/articole">Articole</a>
+        <span>/</span>
+        <span><%= article.title %></span>
+      </div>
+      
+      <div class="ann-meta" style="margin-bottom: 16px; margin-top: 16px;">
+        <span class="ann-date" style="color: rgba(255,255,255,0.8);">
+          <svg viewBox="0 0 20 20" fill="currentColor" style="width: 14px; height: 14px; display: inline-block; vertical-align: middle; margin-right: 4px; margin-top: -2px;">
+            <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+          </svg>
+          <%= new Date(article.published_at).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+        </span>
+        <% if (article.category) { %>
+          <span class="badge" style="background: rgba(255,255,255,0.15); color: #fff; border: 1px solid rgba(255,255,255,0.2);"><%= article.category %></span>
+        <% } %>
+      </div>
+      
+      <h1 class="page-hero-title" style="margin-bottom: 0; line-height: 1.2;"><%= article.title %></h1>
+    </div>
+  </section>
+
+  <!-- Article Content -->
+  <section class="section" style="padding-top: 0; margin-top: -60px; position: relative; z-index: 10;">
+    <div class="container" style="max-width: 800px; margin: 0 auto;">
+      <div class="card reveal" style="border: none; box-shadow: var(--sh-md);">
+        
+        <% if (article.featured_image) { %>
+          <div style="width: 100%; max-height: 450px; overflow: hidden; border-bottom: 1px solid var(--border2);">
+            <img src="<%= article.featured_image %>" alt="<%= article.title %>" style="width: 100%; height: 100%; object-fit: cover;" />
+          </div>
+        <% } %>
+
+        <div class="card-body rich-content" style="padding: 40px; font-size: 1.05rem;">
+          <%- article.content %>
+        </div>
+        
+        <!-- Share & Author section if needed -->
+        <div style="padding: 24px 40px; border-top: 1px solid var(--border2); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; background: var(--bg);">
+          <div style="display: flex; align-items: center; gap: 12px;">
+            <div class="teacher-avatar" style="width: 48px; height: 48px; margin: 0; border: 2px solid var(--p200);">
+              <img src="/images/logo.png" alt="Logo Școală" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;" />
+            </div>
+            <div>
+              <div style="font-weight: 700; font-size: 0.9rem; color: var(--text);">Școala Gimnazială Nr. 2</div>
+              <div style="font-size: 0.8rem; color: var(--text3);">Crețești-Sintești</div>
+            </div>
+          </div>
+          
+          <div>
+            <a href="/articole" class="btn btn-secondary btn-sm">
+              <svg viewBox="0 0 20 20" fill="currentColor" style="width: 14px; height: 14px; margin-right: 6px; display: inline-block; vertical-align: middle;">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+              </svg>
+              Înapoi la Articole
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        if (elementTop < windowHeight - 50) {
+          reveals[i].classList.add('visible');
+        }
+      }
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  });
+</script>
+
+<%- include('../partials/footer') %>

@@ -1,0 +1,107 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header') %>
+
+<main>
+  <!-- Hero Section -->
+  <section class="page-hero">
+    <div class="container">
+      <div class="page-hero-breadcrumb">
+        <a href="/">Acasă</a>
+        <span>/</span>
+        <span>Articole</span>
+      </div>
+      <h1 class="page-hero-title">Articole și Noutăți</h1>
+      <p class="page-hero-sub">Descoperă ultimele evenimente și activități din viața școlii noastre.</p>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="section">
+    <div class="container">
+      
+      <!-- Category Filter -->
+      <% if (categories && categories.length > 0) { %>
+        <div class="filter-bar reveal">
+          <a href="/articole" class="filter-chip <%= !activeCategory ? 'active' : '' %>">Toate</a>
+          <% categories.forEach(cat => { %>
+            <a href="/articole?category=<%= encodeURIComponent(cat) %>" 
+               class="filter-chip <%= activeCategory === cat ? 'active' : '' %>">
+               <%= cat %>
+            </a>
+          <% }) %>
+        </div>
+      <% } %>
+
+      <!-- Articles Grid -->
+      <% if (articles && articles.length > 0) { %>
+        <div class="grid-3">
+          <% articles.forEach((article, index) => { %>
+            <a href="/articole/<%= article.slug %>" class="card reveal reveal-delay-<%= (index % 3) + 1 %>" style="display: flex; flex-direction: column; text-decoration: none; color: inherit;">
+              <% if (article.featured_image) { %>
+                <div style="width: 100%; height: 200px; overflow: hidden; border-bottom: 1px solid var(--border2);">
+                  <img src="<%= article.featured_image %>" alt="<%= article.title %>" style="width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s var(--ease);" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" loading="lazy" />
+                </div>
+              <% } else { %>
+                <div style="width: 100%; height: 200px; background: linear-gradient(135deg, var(--p100), var(--p200)); display: flex; align-items: center; justify-content: center; color: var(--p600); border-bottom: 1px solid var(--border2);">
+                  <svg viewBox="0 0 24 24" fill="currentColor" style="width: 48px; height: 48px; opacity: 0.5;">
+                    <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                  </svg>
+                </div>
+              <% } %>
+              
+              <div class="card-body" style="flex: 1; display: flex; flex-direction: column;">
+                <div class="ann-meta">
+                  <span class="ann-date">
+                    <%= new Date(article.published_at).toLocaleDateString('ro-RO', { day: 'numeric', month: 'long', year: 'numeric' }) %>
+                  </span>
+                  <% if (article.category) { %>
+                    <span class="badge badge-normal"><%= article.category %></span>
+                  <% } %>
+                </div>
+                
+                <h3 class="ann-title" style="margin-bottom: 12px; font-size: 1.15rem;"><%= article.title %></h3>
+                
+                <p class="ann-excerpt" style="flex: 1;"><%= article.excerpt %></p>
+                
+                <div style="margin-top: 16px; font-size: 0.85rem; font-weight: 600; color: var(--p600); display: flex; align-items: center; gap: 4px;">
+                  Citește mai mult
+                  <svg viewBox="0 0 20 20" fill="currentColor" style="width: 16px; height: 16px;">
+                    <path fill-rule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clip-rule="evenodd" />
+                  </svg>
+                </div>
+              </div>
+            </a>
+          <% }) %>
+        </div>
+      <% } else { %>
+        <div class="empty-state reveal">
+          <svg viewBox="0 0 24 24" fill="currentColor">
+            <path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+          </svg>
+          <h3>Nu există articole momentan</h3>
+          <p>Reveniți mai târziu pentru a descoperi noutăți despre școala noastră.</p>
+        </div>
+      <% } %>
+      
+    </div>
+  </section>
+</main>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const reveals = document.querySelectorAll('.reveal');
+    const revealOnScroll = () => {
+      for (let i = 0; i < reveals.length; i++) {
+        const windowHeight = window.innerHeight;
+        const elementTop = reveals[i].getBoundingClientRect().top;
+        if (elementTop < windowHeight - 50) {
+          reveals[i].classList.add('visible');
+        }
+      }
+    };
+    window.addEventListener('scroll', revealOnScroll);
+    revealOnScroll();
+  });
+</script>
+
+<%- include('../partials/footer') %>

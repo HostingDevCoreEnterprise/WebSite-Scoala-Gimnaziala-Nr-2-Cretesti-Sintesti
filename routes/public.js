@@ -108,6 +108,67 @@ router.get('/anunturi', async (req, res) => {
   }
 });
 
+// ── ARTICOLE (BLOG) ──────────────────────────────────────────────────────────
+router.get('/articole', async (req, res, next) => {
+  try {
+    const settings = await getSettings();
+    const { category } = req.query;
+
+    let query = `SELECT id, title, slug, excerpt, featured_image, category, published_at
+                 FROM articles
+                 WHERE is_visible = TRUE`;
+    const params = [];
+    
+    if (category) { 
+      params.push(category); 
+      query += ` AND category = $${params.length}`; 
+    }
+    query += ` ORDER BY published_at DESC`;
+
+    const { rows: articles } = await pool.query(query, params);
+    const { rows: cats } = await pool.query(
+      `SELECT DISTINCT category FROM articles WHERE is_visible=TRUE AND category IS NOT NULL ORDER BY category`
+    );
+
+    res.render('public/articles-list', {
+      title: 'Articole — ' + (settings.school_name || ''),
+      settings,
+      articles,
+      categories: cats.map(r => r.category),
+      activeCategory: category || '',
+      currentPage: 'articole'
+    });
+  } catch (err) { next(err); }
+});
+
+router.get('/articole/:slug', async (req, res, next) => {
+  try {
+    const settings = await getSettings();
+    const { slug } = req.params;
+
+    const { rows } = await pool.query(`SELECT * FROM articles WHERE slug = $1 AND is_visible = TRUE`, [slug]);
+    
+    if (rows.length === 0) {
+      return res.status(404).render('public/error', { 
+        statusCode: 404, 
+        title: 'Articolul nu a fost găsit', 
+        message: 'Articolul pe care îl căutați nu mai există sau a fost mutat.',
+        image: 'error_404_1782736760773.png'
+      });
+    }
+
+    const article = rows[0];
+
+    res.render('public/article-single', {
+      title: (article.meta_title || article.title) + ' — ' + (settings.school_name || ''),
+      metaDesc: article.meta_description || article.excerpt,
+      settings,
+      article,
+      currentPage: 'articole'
+    });
+  } catch (err) { next(err); }
+});
+
 // ── ELEVI ──────────────────────────────────────────────────────────────────────
 router.get('/elevi', async (req, res, next) => {
   try {

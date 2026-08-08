@@ -62,6 +62,26 @@ async function migrate() {
       `, [defaultSectionId]);
     }
 
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS articles (
+        id SERIAL PRIMARY KEY,
+        title VARCHAR(255) NOT NULL,
+        slug VARCHAR(255) NOT NULL UNIQUE,
+        excerpt TEXT,
+        content TEXT NOT NULL,
+        featured_image VARCHAR(500),
+        category VARCHAR(100),
+        meta_title VARCHAR(255),
+        meta_description TEXT,
+        published_at TIMESTAMP DEFAULT NOW(),
+        is_visible BOOLEAN DEFAULT TRUE,
+        created_by INTEGER REFERENCES users(id) ON DELETE SET NULL
+      );
+    `);
+    
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_articles_slug ON articles(slug);`);
+    await pool.query(`CREATE INDEX IF NOT EXISTS idx_articles_published ON articles(is_visible, published_at DESC);`);
+
     console.log('Migration successful');
     process.exit(0);
   } catch (err) {

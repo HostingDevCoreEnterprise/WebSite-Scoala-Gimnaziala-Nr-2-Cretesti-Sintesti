@@ -1,0 +1,136 @@
+<%- include('../partials/admin-layout-top', { currentSection: 'articole' }) %>
+
+<!-- Add / Edit form -->
+<div class="edit-panel">
+  <% if (editing) { %>
+  <p class="edit-panel-title">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    Editare articol: "<%= editing.title %>"
+  </p>
+  <form action="/admin/articole/<%= editing.id %>/update" method="POST">
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label" for="title-edit">Titlu <span class="req">*</span></label>
+        <input type="text" id="title-edit" name="title" class="form-control" value="<%= editing.title %>" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="slug-edit">Slug (URL)</label>
+        <input type="text" id="slug-edit" name="slug" class="form-control" value="<%= editing.slug %>" placeholder="generat-automat" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="category-edit">Categorie</label>
+        <input type="text" id="category-edit" name="category" class="form-control" value="<%= editing.category %>" placeholder="General" />
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="featured_image-edit">Imagine Reprezentativă (URL)</label>
+        <input type="text" id="featured_image-edit" name="featured_image" class="form-control" value="<%= editing.featured_image %>" placeholder="/images/articles/imagine.jpg" />
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="excerpt-edit">Scurtă Descriere (Excerpt)</label>
+        <textarea id="excerpt-edit" name="excerpt" class="form-control" rows="2"><%= editing.excerpt %></textarea>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="visible-edit">Vizibilitate</label>
+        <select id="visible-edit" name="is_visible" class="form-control">
+          <option value="on"  <%= editing.is_visible ? 'selected':'' %>>Vizibil</option>
+          <option value=""    <%= !editing.is_visible ? 'selected':'' %>>Ascuns</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="content-edit">Conținut HTML <span class="req">*</span></label>
+        <textarea id="content-edit" name="content" class="form-control" rows="12" required><%= editing.content %></textarea>
+        <span class="form-hint">Aici puteți scrie conținutul articolului cu tag-uri HTML (p, b, img, etc.).</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="meta_title-edit">Meta Title (SEO)</label>
+        <input type="text" id="meta_title-edit" name="meta_title" class="form-control" value="<%= editing.meta_title %>" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="meta_description-edit">Meta Description (SEO)</label>
+        <textarea id="meta_description-edit" name="meta_description" class="form-control" rows="2"><%= editing.meta_description %></textarea>
+      </div>
+    </div>
+    <div class="form-actions" style="margin-top:16px;">
+      <button type="submit" class="btn btn-primary"> Salvează modificările</button>
+      <a href="/admin/articole" class="btn btn-ghost">Anulează</a>
+    </div>
+  </form>
+  <% } else { %>
+  <p class="edit-panel-title">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Adaugă articol nou
+  </p>
+  <form action="/admin/articole" method="POST">
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label" for="title">Titlu <span class="req">*</span></label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Titlu articol..." required />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="slug">Slug (opțional)</label>
+        <input type="text" id="slug" name="slug" class="form-control" placeholder="generat automat dacă e lăsat gol" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="category">Categorie</label>
+        <input type="text" id="category" name="category" class="form-control" placeholder="Noutăți" />
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="featured_image">Imagine Reprezentativă (URL)</label>
+        <input type="text" id="featured_image" name="featured_image" class="form-control" placeholder="/images/articles/imagine.jpg" />
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="excerpt">Scurtă Descriere (Excerpt)</label>
+        <textarea id="excerpt" name="excerpt" class="form-control" rows="2"></textarea>
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="content">Conținut HTML <span class="req">*</span></label>
+        <textarea id="content" name="content" class="form-control" rows="8" placeholder="Scrie conținutul articolului..." required></textarea>
+        <span class="form-hint">Aici puteți scrie conținutul articolului. Folosiți tag-uri HTML pentru poze și paragrafe.</span>
+      </div>
+    </div>
+    <div class="form-actions" style="margin-top:16px;">
+      <button type="submit" class="btn btn-primary"> Adaugă articol</button>
+    </div>
+  </form>
+  <% } %>
+</div>
+
+<!-- List -->
+<div class="admin-card">
+  <div class="admin-card-header">
+    <span class="admin-card-title">Toate articolele (<%= articles.length %>)</span>
+  </div>
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead><tr><th>Titlu</th><th>Categorie</th><th>Vizibil</th><th>Adăugat</th><th>Acțiuni</th></tr></thead>
+      <tbody>
+        <% if (!articles.length) { %>
+        <tr><td colspan="5" style="text-align:center;padding:24px;color:var(--text3);">Niciun articol. Adaugă primul!</td></tr>
+        <% } %>
+        <% articles.forEach(art => { %>
+        <tr>
+          <td style="font-weight:600;max-width:300px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><%= art.title %></td>
+          <td><%= art.category || '—' %></td>
+          <td>
+            <form action="/admin/articole/<%= art.id %>/toggle" method="POST" style="display:inline;">
+              <button type="submit" class="badge <%= art.is_visible ? 'badge-success' : 'badge-muted' %>" style="cursor:pointer;border:none;">
+                <%= art.is_visible ? ' Da' : ' Nu' %>
+              </button>
+            </form>
+          </td>
+          <td style="white-space:nowrap;"><%= new Date(art.published_at).toLocaleDateString('ro-RO') %></td>
+          <td class="actions">
+            <a href="/admin/articole/<%= art.id %>/edit" class="btn btn-ghost btn-sm">️ Edit</a>
+            <form action="/admin/articole/<%= art.id %>/delete" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger btn-sm"
+                      data-confirm="Ștergi articolul «<%= art.title %>»?">️ Șterge</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('../partials/admin-layout-bottom') %>
