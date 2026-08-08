@@ -26,8 +26,8 @@ async function seed() {
 
     // ── Site settings ────────────────────────────────────────────
     const settings = [
-      ['school_name',     'Școala Gimnazială Nr. 2 Creței-Sintești'],
-      ['school_address',  'Sat Creței, Comuna Sintești, Ilfov'],
+      ['school_name',     'Școala Gimnazială Nr. 2 Crețești-Sintești'],
+      ['school_address',  'Sat Crețești, Comuna Sintești, Ilfov'],
       ['school_phone',    ''],
       ['school_email',    ''],
       ['school_schedule', 'Luni – Vineri: 08:00 – 14:00'],
