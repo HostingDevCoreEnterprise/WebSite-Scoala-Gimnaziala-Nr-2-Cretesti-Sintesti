@@ -1,0 +1,63 @@
+<%- include('../partials/head') %>
+  <%- include('../partials/header', { currentPage: 'elevi' }) %>
+
+    <main>
+      <section class="page-header"
+        style="background: linear-gradient(135deg, var(--p800), var(--p900)); color: white; padding: 100px 0 60px;">
+        <div class="container text-center">
+          <h1 class="reveal">Elevii Noștri</h1>
+          <p class="reveal reveal-delay-1"
+            style="font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 20px auto 0;">Fiecare elev este important
+            pentru noi. Ne mândrim cu rezultatele și cu zâmbetele lor!</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+
+          <!-- Subnavigation Elevi -->
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 50px;">
+            <a href="/elevi" class="btn btn-primary"> Despre Elevi</a>
+            <a href="/inscrieri" class="btn btn-secondary">️ Înscrieri</a>
+            <a href="/activitati-extra" class="btn btn-secondary"> Activități Extracuriculare</a>
+            <a href="/absolvire" class="btn btn-secondary"> Absolvire</a>
+            <a href="/evaluare-nationala" class="btn btn-secondary"> Evaluare Națională</a>
+          </div>
+          <div class="grid-2" style="gap: 40px; margin-bottom: 40px;">
+            <div>
+              <img src="/images/elevi1_105559.jpg" alt="Elevi"
+                style="width: 100%; border-radius: var(--r-md); box-shadow: var(--sh-md);">
+            </div>
+            <div style="display: flex; flex-direction: column; justify-content: center;">
+              <h2 style="color: var(--p700); margin-bottom: 20px; font-weight: 700;">Dezvoltare armonioasă</h2>
+              <p style="color: var(--text2); line-height: 1.7;">Ne dorim să creăm un mediu în care fiecare elev să se
+                simtă respectat și încurajat. Punem accent nu doar pe dezvoltarea academică, ci și pe cea emoțională și
+                socială.</p>
+            </div>
+          </div>
+
+          <div class="grid-2" style="gap: 40px; margin-bottom: 40px;">
+            <div style="display: flex; flex-direction: column; justify-content: center; order: 2;">
+              <h2 style="color: var(--p700); margin-bottom: 20px; font-weight: 700;">Prețuim Performanța și
+                Creativitatea</h2>
+              <p style="color: var(--text2); line-height: 1.7;">Organizam activități care stimulează inteligența și
+                imaginația elevilor, de la ateliere de creație, până la competiții sportive și concursuri școlare unde
+                elevii noștri excelează în permanență.</p>
+            </div>
+            <div style="order: 1;">
+              <img src="/images/elevi3_318273.jpg" alt="Elevi"
+                style="width: 100%; border-radius: var(--r-md); box-shadow: var(--sh-md);">
+            </div>
+          </div>
+
+          <div class="grid-2" style="gap: 20px;">
+            <img src="/images/elevi2_971069.jpg" alt="Elevi"
+              style="width: 100%; border-radius: var(--r-md); box-shadow: var(--sh-md);">
+            <img src="/images/elevi4_515770.jpg" alt="Elevi"
+              style="width: 100%; border-radius: var(--r-md); box-shadow: var(--sh-md);">
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <%- include('../partials/footer', { settings: locals.settings || {} }) %>

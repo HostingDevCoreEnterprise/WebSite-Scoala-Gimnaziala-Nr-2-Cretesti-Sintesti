@@ -1,0 +1,29 @@
+<%- include('../partials/admin-layout-top', { currentSection: 'inscrieri' }) %>
+
+<div class="edit-panel">
+  <p class="edit-panel-title">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-8 0v2"/><circle cx="12" cy="7" r="4"/></svg>
+    Configurare Locuri Înscrieri
+  </p>
+  <form action="/admin/inscrieri" method="POST">
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label" for="year">An Școlar <span class="req">*</span></label>
+        <input type="text" id="year" name="year" class="form-control" value="<%= stats.year %>" required placeholder="ex: 2025-2026">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="total_seats">Număr Total Locuri <span class="req">*</span></label>
+        <input type="number" id="total_seats" name="total_seats" class="form-control" value="<%= stats.total_seats %>" required min="0">
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="occupied_seats">Număr Locuri Ocupate <span class="req">*</span></label>
+        <input type="number" id="occupied_seats" name="occupied_seats" class="form-control" value="<%= stats.occupied_seats %>" required min="0">
+      </div>
+    </div>
+    <div class="form-actions" style="margin-top:16px;">
+      <button type="submit" class="btn btn-primary"> Salvează Datele</button>
+    </div>
+  </form>
+</div>
+
+<%- include('../partials/admin-layout-bottom') %>

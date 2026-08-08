@@ -1,0 +1,194 @@
+<%- include('../partials/admin-layout-top', { currentSection: 'comisii' }) %>
+
+<div class="dashboard-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+
+  <!-- LEFT: Commissions -->
+  <div>
+    <!-- Add/Edit commission -->
+    <div class="edit-panel">
+      <% if (editComm) { %>
+      <p class="edit-panel-title">️ Editare comisie</p>
+      <form action="/admin/comisii/<%= editComm.id %>/update" method="POST">
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label">Denumire <span class="req">*</span></label>
+          <input type="text" name="name" class="form-control" value="<%= editComm.name %>" required />
+        </div>
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label">Descriere</label>
+          <textarea name="description" class="form-control" rows="3"><%= editComm.description||'' %></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom:16px;">
+          <label class="form-label">Ordine afișare</label>
+          <input type="number" name="display_order" class="form-control" value="<%= editComm.display_order %>" />
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-sm"> Salvează</button>
+          <a href="/admin/comisii" class="btn btn-ghost btn-sm">Anulează</a>
+        </div>
+      </form>
+      <% } else { %>
+      <p class="edit-panel-title"> Comisie nouă</p>
+      <form action="/admin/comisii" method="POST">
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label">Denumire <span class="req">*</span></label>
+          <input type="text" name="name" class="form-control" placeholder="Ex: Comisia de Matematică" required />
+        </div>
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label">Descriere</label>
+          <textarea name="description" class="form-control" rows="3" placeholder="Descriere scurtă..."></textarea>
+        </div>
+        <div class="form-group" style="margin-bottom:16px;">
+          <label class="form-label">Ordine</label>
+          <input type="number" name="display_order" class="form-control" value="0" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm"> Adaugă</button>
+      </form>
+      <% } %>
+    </div>
+
+    <!-- Commissions table -->
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-title">Comisii (<%= commissions.length %>)</span></div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>Denumire</th><th>Profesori</th><th>Acțiuni</th></tr></thead>
+          <tbody>
+            <% if (!commissions.length) { %>
+            <tr><td colspan="3" style="text-align:center;padding:20px;color:var(--text3);">Nicio comisie.</td></tr>
+            <% } %>
+            <% commissions.forEach(c => { %>
+            <tr>
+              <td style="font-weight:600;"><%= c.name %></td>
+              <td><span class="badge badge-normal"><%= teachers.filter(t=>t.commission_id===c.id).length %></span></td>
+              <td class="actions">
+                <a href="/admin/comisii?editComm=<%= c.id %>" class="btn btn-ghost btn-sm">Editează</a>
+                <form action="/admin/comisii/<%= c.id %>/delete" method="POST" style="display:inline;">
+                  <button type="submit" class="btn btn-danger btn-sm"
+                          data-confirm="Ștergi comisia «<%= c.name %>» și toți profesorii ei?">Șterge</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Teachers -->
+  <div>
+    <!-- Add/Edit teacher -->
+    <div class="edit-panel">
+      <% if (editTeach) { %>
+      <p class="edit-panel-title">️ Editare profesor</p>
+      <form action="/admin/profesori/<%= editTeach.id %>/update" method="POST">
+        <div class="form-grid" style="grid-template-columns:1fr;">
+          <div class="form-group">
+            <label class="form-label">Comisie <span class="req">*</span></label>
+            <select name="commission_id" class="form-control" required>
+              <% commissions.forEach(c => { %>
+              <option value="<%= c.id %>" <%= c.id===editTeach.commission_id?'selected':'' %>><%= c.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nume complet <span class="req">*</span></label>
+            <input type="text" name="name" class="form-control" value="<%= editTeach.name %>" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Materie</label>
+            <input type="text" name="subject" class="form-control" value="<%= editTeach.subject||'' %>" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">URL foto</label>
+            <input type="url" name="photo_url" class="form-control" value="<%= editTeach.photo_url||'' %>" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Biografie scurtă</label>
+            <textarea name="bio" class="form-control" rows="3"><%= editTeach.bio||'' %></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ordine</label>
+            <input type="number" name="display_order" class="form-control" value="<%= editTeach.display_order %>" />
+          </div>
+        </div>
+        <div class="form-actions" style="margin-top:12px;">
+          <button type="submit" class="btn btn-primary btn-sm"> Salvează</button>
+          <a href="/admin/comisii" class="btn btn-ghost btn-sm">Anulează</a>
+        </div>
+      </form>
+      <% } else { %>
+      <p class="edit-panel-title"> Profesor nou</p>
+      <% if (!commissions.length) { %>
+        <p style="color:var(--text3);font-size:.875rem;">Adaugă mai întâi o comisie.</p>
+      <% } else { %>
+      <form action="/admin/profesori" method="POST">
+        <div class="form-grid" style="grid-template-columns:1fr;">
+          <div class="form-group">
+            <label class="form-label">Comisie <span class="req">*</span></label>
+            <select name="commission_id" class="form-control" required>
+              <option value="">— Alege comisia —</option>
+              <% commissions.forEach(c => { %><option value="<%= c.id %>"><%= c.name %></option><% }) %>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Nume complet <span class="req">*</span></label>
+            <input type="text" name="name" class="form-control" placeholder="Prof. Ion Popescu" required />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Materie</label>
+            <input type="text" name="subject" class="form-control" placeholder="Matematică" />
+          </div>
+          <div class="form-group">
+            <label class="form-label">URL foto</label>
+            <input type="url" name="photo_url" class="form-control" placeholder="https://..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label">Biografie scurtă</label>
+            <textarea name="bio" class="form-control" rows="2" placeholder="Câteva cuvinte despre profesor..."></textarea>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Ordine afișare</label>
+            <input type="number" name="display_order" class="form-control" value="0" />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm" style="margin-top:12px;"> Adaugă profesor</button>
+      </form>
+      <% } %>
+      <% } %>
+    </div>
+
+    <!-- Teachers table -->
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-title">Profesori (<%= teachers.length %>)</span></div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead><tr><th>Nume</th><th>Comisie</th><th>Materie</th><th>Acțiuni</th></tr></thead>
+          <tbody>
+            <% if (!teachers.length) { %>
+            <tr><td colspan="4" style="text-align:center;padding:20px;color:var(--text3);">Niciun profesor.</td></tr>
+            <% } %>
+            <% teachers.forEach(t => { %>
+            <% const comm = commissions.find(c=>c.id===t.commission_id); %>
+            <tr>
+              <td style="font-weight:600;"><%= t.name %></td>
+              <td style="font-size:.8rem;color:var(--text3);"><%= comm?.name || '—' %></td>
+              <td><%= t.subject || '—' %></td>
+              <td class="actions">
+                <a href="/admin/comisii?editTeach=<%= t.id %>" class="btn btn-ghost btn-sm">Editează</a>
+                <form action="/admin/profesori/<%= t.id %>/delete" method="POST" style="display:inline;">
+                  <button type="submit" class="btn btn-danger btn-sm"
+                          data-confirm="Ștergi profesorul «<%= t.name %>»?">Șterge</button>
+                </form>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<%- include('../partials/admin-layout-bottom') %>

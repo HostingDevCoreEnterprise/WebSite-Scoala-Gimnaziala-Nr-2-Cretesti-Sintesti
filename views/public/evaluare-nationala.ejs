@@ -1,0 +1,64 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header', { currentPage: 'evaluare-nationala' }) %>
+
+<main>
+  <section class="page-header" style="background: linear-gradient(135deg, var(--p800), var(--p900)); color: white; padding: 100px 0 60px;">
+    <div class="container text-center">
+      <h1 class="reveal">Evaluare Națională 2025-2026</h1>
+      <p class="reveal reveal-delay-1" style="font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 20px auto 0;">Informații și calendar oficial</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      
+      <!-- Meniu Selectie Clasa -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 40px;">
+        <a href="/evaluare-nationala?tab=2" class="btn <%= tab === '2' ? 'btn-primary' : 'btn-secondary' %>">Clasa a II-a</a>
+        <a href="/evaluare-nationala?tab=4" class="btn <%= tab === '4' ? 'btn-primary' : 'btn-secondary' %>">Clasa a IV-a</a>
+        <a href="/evaluare-nationala?tab=6" class="btn <%= tab === '6' ? 'btn-primary' : 'btn-secondary' %>">Clasa a VI-a</a>
+        <a href="/evaluare-nationala?tab=8" class="btn <%= tab === '8' ? 'btn-primary' : 'btn-secondary' %>">Clasa a VIII-a</a>
+      </div>
+
+      <% 
+        let titleClass = '';
+        let svgColorClass = 'text-primary';
+        if (tab === '8') {
+          titleClass = 'var(--s500)';
+        } else {
+          titleClass = 'var(--p700)';
+        }
+      %>
+      <div class="card" style="margin-bottom: 30px; border: none; box-shadow: 0 10px 25px rgba(0,0,0,0.05); border-radius: var(--r-xl);">
+        <div class="card-body" style="padding: 30px;">
+          <h2 style="color: <%= titleClass %>; margin-bottom: 20px; font-size: 1.5rem; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+            <div style="background: var(--p50); width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; color: <%= titleClass %>;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+            </div>
+            <% if (tab === '8') { %>
+              Calendar – Clasa a VIII-a (2025-2026)
+            <% } else { %>
+              Evaluarea naţională – EN <%= tab === '2' ? 'II' : tab === '4' ? 'IV' : 'VI' %>
+            <% } %>
+          </h2>
+          <ul style="list-style: none; padding: 0; line-height: <%= tab === '8' ? '2' : '1.8' %>; font-size: 1.1rem; color: var(--text2);">
+            <% if (calendarEvents && calendarEvents.length > 0) { %>
+              <% calendarEvents.forEach((event, index) => { %>
+                <li style="<%= tab === '8' && index < calendarEvents.length - 1 ? 'border-bottom: 1px solid var(--border2); padding-bottom: 10px; margin-bottom: 10px;' : 'margin-bottom: 10px;' %>">
+                  <strong style="<%= event.is_highlighted ? (tab === '8' && index === calendarEvents.length -1 ? 'color: var(--s500);' : 'color: var(--p700); font-weight: 600;') : '' %>">
+                    <%= event.date_text %>
+                  </strong> <%= tab === '8' ? ':' : '-' %> <%= event.event_description %>
+                </li>
+              <% }) %>
+            <% } else { %>
+              <li>Nu există date disponibile momentan.</li>
+            <% } %>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer', { settings: locals.settings || {} }) %>

@@ -1,0 +1,59 @@
+<%- include('../partials/admin-layout-top', { currentSection: 'setari' }) %>
+
+<div class="admin-card">
+  <div class="admin-card-header">
+    <span class="admin-card-title">️ Setări generale</span>
+  </div>
+  <div class="admin-card-body">
+    <form action="/admin/setari" method="POST">
+      <div class="form-grid">
+        <div class="form-group full">
+          <label class="form-label">Denumirea școlii</label>
+          <input type="text" name="school_name" class="form-control" value="<%= settings.school_name||'' %>" placeholder="Școala Gimnazială Nr. 2..." />
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Adresa</label>
+          <input type="text" name="school_address" class="form-control" value="<%= settings.school_address||'' %>" placeholder="Sat Creței, Comuna Sintești, Ilfov" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Telefon</label>
+          <input type="text" name="school_phone" class="form-control" value="<%= settings.school_phone||'' %>" placeholder="0xxx xxx xxx" />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input type="email" name="school_email" class="form-control" value="<%= settings.school_email||'' %>" placeholder="scoala@exemplu.ro" />
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Program / Orar</label>
+          <input type="text" name="school_schedule" class="form-control" value="<%= settings.school_schedule||'' %>" placeholder="Luni – Vineri: 08:00 – 14:00" />
+        </div>
+        <div class="form-group full">
+          <label class="form-label">Text extra footer (opțional)</label>
+          <textarea name="footer_extra" class="form-control" rows="3" placeholder="Orice informație suplimentară pentru footer..."><%= settings.footer_extra||'' %></textarea>
+        </div>
+      </div>
+      <div class="form-actions" style="margin-top:16px;">
+        <button type="submit" class="btn btn-primary"> Salvează setările</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="admin-card">
+  <div class="admin-card-header"><span class="admin-card-title">️ Logo</span></div>
+  <div class="admin-card-body">
+    <p style="color:var(--text2);font-size:.875rem;margin-bottom:12px;">
+      Înlocuiește fișierul <code style="background:var(--bg);padding:2px 6px;border-radius:4px;font-family:monospace;">public/images/logo.png</code> cu logo-ul școlii.
+      Dimensiune recomandată: <strong>200×200px</strong>, format PNG sau JPG.
+    </p>
+    <div style="display:flex;align-items:center;gap:16px;">
+      <div style="width:60px;height:60px;border-radius:12px;overflow:hidden;background:var(--p100);display:flex;align-items:center;justify-content:center;">
+        <img src="/images/logo.png" alt="Logo curent" style="width:100%;height:100%;object-fit:cover;"
+             onerror="this.style.display='none';this.parentElement.innerHTML='<span style=font-size:1.5rem>S</span>'" />
+      </div>
+      <p style="font-size:.825rem;color:var(--text3);">Logo curent — înlocuiește fișierul prin FTP/SSH sau în interfața Render.</p>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/admin-layout-bottom') %>

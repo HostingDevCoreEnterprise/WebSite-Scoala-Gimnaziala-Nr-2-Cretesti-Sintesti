@@ -1,0 +1,21 @@
+    </div><!-- /admin-content -->
+  </div><!-- /admin-main -->
+</div><!-- /admin-wrap -->
+<script src="/js/app.js"></script>
+<script>
+  const adminToggle = document.getElementById('adminToggle');
+  const adminSidebar = document.getElementById('adminSidebar');
+  const adminOverlay = document.getElementById('adminOverlay');
+  if(adminToggle && adminSidebar && adminOverlay) {
+    adminToggle.addEventListener('click', () => {
+      adminSidebar.classList.add('open');
+      adminOverlay.classList.add('show');
+    });
+    adminOverlay.addEventListener('click', () => {
+      adminSidebar.classList.remove('open');
+      adminOverlay.classList.remove('show');
+    });
+  }
+</script>
+</body>
+</html>

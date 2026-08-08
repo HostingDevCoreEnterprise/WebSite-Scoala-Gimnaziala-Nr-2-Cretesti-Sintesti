@@ -1,0 +1,121 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header', { currentPage: 'contact' }) %>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <nav class="page-hero-breadcrumb"><a href="/">Acasă</a><span>/</span><span>Contact</span></nav>
+      <h1 class="page-hero-title"> Contact</h1>
+      <p class="page-hero-sub">Vrem să fim mereu la dispoziția dumneavoastră. Contactați-ne oricând.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <% if (flash && flash.type === 'success') { %>
+        <div style="background: rgba(16, 185, 129, 0.1); color: var(--success); border: 1px solid var(--success); padding: 15px; border-radius: var(--r-sm); margin-bottom: 30px; text-align: center; font-weight: 600;">
+          <%= flash.message %>
+        </div>
+      <% } else if (flash && flash.type === 'error') { %>
+        <div style="background: rgba(220, 38, 38, 0.1); color: var(--danger); border: 1px solid var(--danger); padding: 15px; border-radius: var(--r-sm); margin-bottom: 30px; text-align: center; font-weight: 600;">
+          <%= flash.message %>
+        </div>
+      <% } %>
+
+      <div class="grid-2" style="max-width: 1000px; margin: 0 auto; gap: 40px;">
+        
+        <!-- Contact Information -->
+        <div class="card reveal">
+          <div class="card-body" style="padding: 40px;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--p800); margin-bottom: 30px;">Informații de Contact</h2>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px;">
+              <% if (settings.school_address) { %>
+                <div style="display: flex; align-items: flex-start; gap: 15px;">
+                  <div style="width: 40px; height: 40px; background: var(--p100); color: var(--p600); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" /><circle cx="12" cy="9" r="2.5" /></svg>
+                  </div>
+                  <div>
+                    <strong style="display: block; color: var(--text); font-size: 1.05rem;">Adresă</strong>
+                    <span style="color: var(--text3); font-size: 0.95rem;"><%= settings.school_address %></span>
+                  </div>
+                </div>
+              <% } %>
+
+              <% if (settings.school_phone) { %>
+                <div style="display: flex; align-items: flex-start; gap: 15px;">
+                  <div style="width: 40px; height: 40px; background: var(--p100); color: var(--p600); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.67A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z" /></svg>
+                  </div>
+                  <div>
+                    <strong style="display: block; color: var(--text); font-size: 1.05rem;">Telefon Secretariat</strong>
+                    <span style="color: var(--text3); font-size: 0.95rem;"><%= settings.school_phone %></span>
+                  </div>
+                </div>
+              <% } %>
+
+              <% if (settings.school_email) { %>
+                <div style="display: flex; align-items: flex-start; gap: 15px;">
+                  <div style="width: 40px; height: 40px; background: var(--p100); color: var(--p600); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" /></svg>
+                  </div>
+                  <div>
+                    <strong style="display: block; color: var(--text); font-size: 1.05rem;">Email</strong>
+                    <a href="mailto:<%= settings.school_email %>" style="color: var(--p600); font-size: 0.95rem; text-decoration: none;"><%= settings.school_email %></a>
+                  </div>
+                </div>
+              <% } %>
+
+              <% if (settings.school_schedule) { %>
+                <div style="display: flex; align-items: flex-start; gap: 15px;">
+                  <div style="width: 40px; height: 40px; background: var(--p100); color: var(--p600); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" /></svg>
+                  </div>
+                  <div>
+                    <strong style="display: block; color: var(--text); font-size: 1.05rem;">Program Elevi</strong>
+                    <span style="color: var(--text3); font-size: 0.95rem;"><%= settings.school_schedule %></span>
+                  </div>
+                </div>
+              <% } %>
+            </div>
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <div class="card reveal reveal-delay-1">
+          <div class="card-body" style="padding: 40px;">
+            <h2 style="font-size: 1.5rem; font-weight: 700; color: var(--p800); margin-bottom: 20px;">Trimite-ne un mesaj</h2>
+            <form action="/contact" method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+              <div>
+                <label for="name" style="display: block; font-size: 0.9rem; font-weight: 600; color: var(--text2); margin-bottom: 5px;">Nume Complet *</label>
+                <input type="text" id="name" name="name" required style="width: 100%; padding: 10px 15px; border: 1px solid var(--border); border-radius: var(--r-sm); font-size: 1rem; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--p500)'" onblur="this.style.borderColor='var(--border)'">
+              </div>
+              
+              <div>
+                <label for="email" style="display: block; font-size: 0.9rem; font-weight: 600; color: var(--text2); margin-bottom: 5px;">Email *</label>
+                <input type="email" id="email" name="email" required style="width: 100%; padding: 10px 15px; border: 1px solid var(--border); border-radius: var(--r-sm); font-size: 1rem; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--p500)'" onblur="this.style.borderColor='var(--border)'">
+              </div>
+
+              <div>
+                <label for="subject" style="display: block; font-size: 0.9rem; font-weight: 600; color: var(--text2); margin-bottom: 5px;">Subiect</label>
+                <input type="text" id="subject" name="subject" style="width: 100%; padding: 10px 15px; border: 1px solid var(--border); border-radius: var(--r-sm); font-size: 1rem; outline: none; transition: border-color 0.2s;" onfocus="this.style.borderColor='var(--p500)'" onblur="this.style.borderColor='var(--border)'">
+              </div>
+
+              <div>
+                <label for="message" style="display: block; font-size: 0.9rem; font-weight: 600; color: var(--text2); margin-bottom: 5px;">Mesaj *</label>
+                <textarea id="message" name="message" required rows="5" style="width: 100%; padding: 10px 15px; border: 1px solid var(--border); border-radius: var(--r-sm); font-size: 1rem; outline: none; transition: border-color 0.2s; resize: vertical;" onfocus="this.style.borderColor='var(--p500)'" onblur="this.style.borderColor='var(--border)'"></textarea>
+              </div>
+
+              <button type="submit" style="background: var(--p600); color: #fff; border: none; padding: 12px 20px; font-size: 1rem; font-weight: 600; border-radius: var(--r-sm); cursor: pointer; transition: background 0.3s; margin-top: 10px;" onmouseover="this.style.background='var(--p700)'" onmouseout="this.style.background='var(--p600)'">
+                Trimite Mesajul
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer', { settings }) %>

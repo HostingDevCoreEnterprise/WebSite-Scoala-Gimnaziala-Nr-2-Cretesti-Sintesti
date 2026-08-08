@@ -1,0 +1,163 @@
+<nav class="navbar" id="navbar">
+  <div class="container">
+    <div class="nav-brand-wrap">
+      <a href="/" class="nav-brand">
+        <div class="nav-logo-wrap">
+          <img src="/images/logo.png" alt="Logo" onerror="this.style.display='none';this.parentElement.innerHTML='S'" />
+        </div>
+        <span class="nav-school-name">Școala Gimnazială Nr. 2 Crețești-Sintești</span>
+      </a>
+    </div>
+
+    <ul class="nav-links" role="list">
+      <li class="nav-item">
+        <a href="/" class="nav-link <%= currentPage === 'home' ? 'active' : '' %>">Acasă</a>
+      </li>
+      <li class="nav-item">
+        <a href="/anunturi" class="nav-link <%= currentPage === 'anunturi' ? 'active' : '' %>">Anunțuri</a>
+      </li>
+      <li class="nav-item">
+        <a href="#"
+          class="nav-link <%= ['elevi', 'inscrieri', 'activitati-extra', 'absolvire', 'evaluare-nationala'].includes(currentPage) ? 'active' : '' %>">
+          Elevi
+          <svg viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+              clip-rule="evenodd" />
+          </svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="/elevi" class="dropdown-link"> Despre Elevi</a>
+          <a href="/inscrieri" class="dropdown-link">️ Înscrieri</a>
+          <a href="/activitati-extra" class="dropdown-link"> Activități Extracuriculare</a>
+          <a href="/absolvire" class="dropdown-link"> Absolvire</a>
+          <a href="/evaluare-nationala" class="dropdown-link"> Evaluare Națională</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link <%= ['profesori', 'comisii'].includes(currentPage) ? 'active' : '' %>">
+          Profesori
+          <svg viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+              clip-rule="evenodd" />
+          </svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="/profesori" class="dropdown-link">‍ Despre Profesori</a>
+          <a href="/comisii" class="dropdown-link"> Comisii Curriculum</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="/informatii-publice" class="nav-link <%= typeof currentPage !== 'undefined' && currentPage === 'informatii-publice' ? 'active' : '' %>">Informații Publice</a>
+      </li>
+      <li class="nav-item">
+        <a href="#"
+          class="nav-link <%= ['despre-scoala', 'conducere', 'modernizare'].includes(currentPage) ? 'active' : '' %>">
+          Despre
+          <svg viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd"
+              d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+              clip-rule="evenodd" />
+          </svg>
+        </a>
+        <div class="nav-dropdown">
+          <a href="/despre-scoala" class="dropdown-link"> Despre Școală</a>
+          <a href="/conducere" class="dropdown-link"> Conducere</a>
+          <a href="/modernizare" class="dropdown-link">️ Modernizare Școală</a>
+        </div>
+      </li>
+      <li class="nav-item">
+        <a href="/contact" class="nav-link <%= currentPage === 'contact' ? 'active' : '' %>">Contact</a>
+      </li>
+    </ul>
+
+    <button class="nav-hamburger" aria-label="Meniu" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- Mobile nav -->
+<div class="nav-mobile" id="mobileNav">
+  <div class="nav-mobile-inner" style="max-height: calc(100vh - 100px); overflow-y: auto;">
+    <a href="/" class="nav-mobile-link <%= currentPage === 'home' ? 'active' : '' %>">Acasă</a>
+    <a href="/anunturi" class="nav-mobile-link <%= currentPage === 'anunturi' ? 'active' : '' %>">Anunțuri</a>
+
+    <div class="nav-mobile-accordion">
+      <button
+        class="nav-mobile-link nav-mobile-toggle <%= ['elevi', 'inscrieri', 'activitati-extra', 'absolvire', 'evaluare-nationala'].includes(currentPage) ? 'active' : '' %>"
+        style="width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+        Elevi
+        <svg viewBox="0 0 20 20" fill="currentColor" style="width: 16px; height: 16px; transition: transform 0.2s;">
+          <path fill-rule="evenodd"
+            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            clip-rule="evenodd" />
+        </svg>
+      </button>
+      <div class="nav-mobile-sub" style="display: none;">
+        <a href="/elevi" class="nav-mobile-link">Despre Elevi</a>
+        <a href="/inscrieri" class="nav-mobile-link">Înscrieri</a>
+        <a href="/activitati-extra" class="nav-mobile-link">Activități Extracuriculare</a>
+        <a href="/absolvire" class="nav-mobile-link">Absolvire</a>
+        <a href="/evaluare-nationala" class="nav-mobile-link">Evaluare Națională</a>
+      </div>
+    </div>
+
+    <div class="nav-mobile-accordion">
+      <button
+        class="nav-mobile-link nav-mobile-toggle <%= ['profesori', 'comisii'].includes(currentPage) ? 'active' : '' %>"
+        style="width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+        Profesori
+        <svg viewBox="0 0 20 20" fill="currentColor" style="width: 16px; height: 16px; transition: transform 0.2s;">
+          <path fill-rule="evenodd"
+            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            clip-rule="evenodd" />
+        </svg>
+      </button>
+      <div class="nav-mobile-sub" style="display: none;">
+        <a href="/profesori" class="nav-mobile-link">Despre Profesori</a>
+        <a href="/comisii" class="nav-mobile-link">Comisii Curriculum</a>
+      </div>
+    </div>
+
+    <a href="/informatii-publice" class="nav-mobile-link <%= typeof currentPage !== 'undefined' && currentPage === 'informatii-publice' ? 'active' : '' %>">Informații Publice</a>
+
+    <div class="nav-mobile-accordion">
+      <button
+        class="nav-mobile-link nav-mobile-toggle <%= ['despre-scoala', 'conducere', 'modernizare'].includes(currentPage) ? 'active' : '' %>"
+        style="width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center;">
+        Despre
+        <svg viewBox="0 0 20 20" fill="currentColor" style="width: 16px; height: 16px; transition: transform 0.2s;">
+          <path fill-rule="evenodd"
+            d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z"
+            clip-rule="evenodd" />
+        </svg>
+      </button>
+      <div class="nav-mobile-sub" style="display: none;">
+        <a href="/despre-scoala" class="nav-mobile-link">Despre Școală</a>
+        <a href="/conducere" class="nav-mobile-link">Conducere</a>
+        <a href="/modernizare" class="nav-mobile-link">Modernizare Școală</a>
+      </div>
+    </div>
+
+    <a href="/contact" class="nav-mobile-link <%= currentPage === 'contact' ? 'active' : '' %>">Contact</a>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.nav-mobile-toggle').forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      const sub = this.nextElementSibling;
+      const icon = this.querySelector('svg');
+      if (sub.style.display === 'none' || !sub.style.display) {
+        sub.style.display = 'block';
+        if (icon) icon.style.transform = 'rotate(180deg)';
+      } else {
+        sub.style.display = 'none';
+        if (icon) icon.style.transform = '';
+      }
+    });
+  });
+</script>

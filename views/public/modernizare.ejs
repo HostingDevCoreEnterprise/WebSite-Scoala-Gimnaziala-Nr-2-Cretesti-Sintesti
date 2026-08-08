@@ -1,0 +1,139 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header', { currentPage: 'modernizare' }) %>
+
+<main>
+  <!-- Hero Section -->
+  <section class="page-header" style="background: linear-gradient(135deg, var(--p800), var(--p900)); color: white; padding: 100px 0 60px 0; text-align: center;">
+    <div class="container">
+      <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 20px;">Proiect de Modernizare</h1>
+      <p style="font-size: 1.1rem; opacity: 0.9; max-width: 600px; margin: 0 auto;">
+        Construirea unei unități de învățământ moderne, eficiente energetic și adaptate cerințelor actuale.
+      </p>
+    </div>
+  </section>
+
+  <!-- Image & Intro -->
+  <section class="section" style="padding: 60px 0;">
+    <div class="container">
+      <div style="background: var(--white); border-radius: var(--r-lg); box-shadow: var(--sh-md); overflow: hidden; margin-bottom: 40px;">
+        <img src="/images/noua_scoala_moderna_1782732617311.png" alt="Noua Școală Modernă" style="width: 100%; height: auto; max-height: 500px; object-fit: cover;" />
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr; gap: 40px;">
+        <!-- Left Content -->
+        <div>
+          <h2 style="color: var(--p700); margin-bottom: 15px; font-weight: 700;">Obiectivele proiectului</h2>
+          <p style="margin-bottom: 25px; color: var(--text2);">
+            Proiectul are ca scop construirea unei unități de învățământ moderne, eficiente energetic și adaptate cerințelor actuale ale procesului educațional. Noul corp de clădire va oferi un mediu sigur și adecvat pentru desfășurarea activităților școlare, contribuind semnificativ la dezvoltarea educației în satul Crețești, comuna Vidra.
+          </p>
+
+          <h2 style="color: var(--p700); margin-bottom: 15px; font-weight: 700;">Școala și comunitatea – scurt istoric</h2>
+          <p style="margin-bottom: 25px; color: var(--text2);">
+            Situată în satul Crețești, comuna Vidra, județul Ilfov, Școala Gimnazială Nr. 2 joacă un rol central în viața comunității locale. Creșterea numărului de elevi și nevoia de infrastructură educațională modernă au determinat inițierea acestui proiect de construcție nouă, conceput pentru a respecta standardele de siguranță, accesibilitate și sustenabilitate.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Grid -->
+  <section style="background: var(--p50); padding: 60px 0;">
+    <div class="container">
+      <h2 style="text-align: center; color: var(--p800); margin-bottom: 40px; font-weight: 800; font-size: 2rem;">Funcționalități și Dotări</h2>
+      
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px;">
+        
+        <!-- Card 1 -->
+        <div style="background: var(--white); padding: 30px; border-radius: var(--r-md); box-shadow: var(--sh-sm);">
+          <div style="font-size: 2rem; margin-bottom: 15px;"></div>
+          <h3 style="margin-bottom: 15px; color: var(--text);">Facilități Educaționale</h3>
+          <ul style="list-style: none; padding: 0; color: var(--text2);">
+            <li style="margin-bottom: 10px;"> 7 săli de clasă</li>
+            <li style="margin-bottom: 10px;"> 2 laboratoare</li>
+            <li style="margin-bottom: 10px;"> Centru de Documentare și Informare (C.D.I.)</li>
+            <li style="margin-bottom: 10px;"> Bibliotecă</li>
+          </ul>
+        </div>
+
+        <!-- Card 2 -->
+        <div style="background: var(--white); padding: 30px; border-radius: var(--r-md); box-shadow: var(--sh-sm);">
+          <div style="font-size: 2rem; margin-bottom: 15px;">️</div>
+          <h3 style="margin-bottom: 15px; color: var(--text);">Administrativ & Auxiliar</h3>
+          <ul style="list-style: none; padding: 0; color: var(--text2);">
+            <li style="margin-bottom: 10px;"> Sală de mese cu anexe</li>
+            <li style="margin-bottom: 10px;"> Sală de gimnastică cu anexe</li>
+            <li style="margin-bottom: 10px;"> Cancelarie, Secretariat & Birou director</li>
+            <li style="margin-bottom: 10px;"> Cabinet medical & psihologic</li>
+          </ul>
+        </div>
+
+        <!-- Card 3 -->
+        <div style="background: var(--white); padding: 30px; border-radius: var(--r-md); box-shadow: var(--sh-sm);">
+          <div style="font-size: 2rem; margin-bottom: 15px;">️</div>
+          <h3 style="margin-bottom: 15px; color: var(--text);">Siguranță & Tehnologie</h3>
+          <ul style="list-style: none; padding: 0; color: var(--text2);">
+            <li style="margin-bottom: 10px;"> Sistem de detecție și alarmare incendiu</li>
+            <li style="margin-bottom: 10px;"> Rețea de date pentru infrastructura digitală</li>
+            <li style="margin-bottom: 10px;"> Sisteme de supraveghere video</li>
+            <li style="margin-bottom: 10px;"> Ascensor & Grupuri sanitare accesibile</li>
+          </ul>
+        </div>
+
+        <!-- Card 4 -->
+        <div style="background: var(--white); padding: 30px; border-radius: var(--r-md); box-shadow: var(--sh-sm);">
+          <div style="font-size: 2rem; margin-bottom: 15px;"></div>
+          <h3 style="margin-bottom: 15px; color: var(--text);">Eficiență Energetică (NZEB)</h3>
+          <ul style="list-style: none; padding: 0; color: var(--text2);">
+            <li style="margin-bottom: 10px;"> Pompe de căldură (încălzire/climatizare)</li>
+            <li style="margin-bottom: 10px;"> Ventilare cu recuperatoare de căldură</li>
+            <li style="margin-bottom: 10px;"> Panouri fotovoltaice</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Status & Partners -->
+  <section style="padding: 60px 0;">
+    <div class="container grid-2" style="align-items: start;">
+      
+      <div>
+        <h2 style="color: var(--p700); margin-bottom: 15px; font-weight: 700;">Stadiul proiectului</h2>
+        <ul style="list-style: none; padding: 0; margin-bottom: 25px;">
+          <li style="padding-left: 20px; position: relative; margin-bottom: 10px; color: var(--text2);">
+            <span style="position: absolute; left: 0; color: var(--p500);">•</span> Etapa de proiectare tehnică a început în luna decembrie 2024.
+          </li>
+          <li style="padding-left: 20px; position: relative; margin-bottom: 10px; color: var(--text2);">
+            <span style="position: absolute; left: 0; color: var(--p500);">•</span> Pe 22 ianuarie 2025 a avut loc o consultare inițială privind proiectarea noii școli.
+          </li>
+        </ul>
+
+        <h3 style="color: var(--text); margin-bottom: 10px;">Relocarea temporară a școlii</h3>
+        <p style="color: var(--text2); background: var(--p50); padding: 15px; border-left: 4px solid var(--p500); border-radius: 4px;">
+          Școala mobilă cu 4 săli de clasă este funcțională.
+        </p>
+      </div>
+
+      <div>
+        <h2 style="color: var(--p700); margin-bottom: 25px; font-weight: 700;">Parteneri & Link-uri utile</h2>
+        
+        <div style="display: flex; flex-wrap: wrap; gap: 20px; margin-bottom: 30px;">
+          <img src="/images/logo_minister_educatie_1782732626868.png" alt="Ministerul Educației" style="max-width: 100%; height: 80px; object-fit: contain; border-radius: var(--r-sm); box-shadow: var(--sh-xs);" />
+          <img src="/images/logo_umpmrsu_1782732635517.png" alt="UMPMRSU" style="max-width: 100%; height: 80px; object-fit: contain; border-radius: var(--r-sm); box-shadow: var(--sh-xs);" />
+        </div>
+
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px;">
+          <li> <a href="https://www.gov.ro" target="_blank" style="color: var(--p600); font-weight: 500;">Guvernul României (gov.ro)</a></li>
+          <li> <a href="https://www.edu.ro" target="_blank" style="color: var(--p600); font-weight: 500;">Ministerul Educației (edu.ro)</a></li>
+          <li> <a href="https://www.worldbank.org/" target="_blank" style="color: var(--p600); font-weight: 500;">Banca Mondială (worldbank.org)</a></li>
+          <li> <a href="https://mfinante.gov.ro" target="_blank" style="color: var(--p600); font-weight: 500;">Ministerul Finanțelor (mfinante.gov.ro)</a></li>
+          <li> <a href="https://fiipregatit.ro/" target="_blank" style="color: var(--p600); font-weight: 500;">Fii Pregătit (fiipregatit.ro)</a></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer') %>

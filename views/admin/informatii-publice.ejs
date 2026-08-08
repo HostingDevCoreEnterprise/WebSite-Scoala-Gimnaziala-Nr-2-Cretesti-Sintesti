@@ -1,0 +1,162 @@
+<%- include('../partials/admin-layout-top', { currentSection: 'informatii-publice' }) %>
+
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px;">
+
+  <!-- Sections Panel -->
+  <div>
+    <div class="edit-panel">
+      <p class="edit-panel-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <%= editSec ? 'Editare secțiune: ' + editSec.name : 'Adaugă secțiune nouă' %>
+      </p>
+      <form action="/admin/informatii-publice/sections<%= editSec ? `/${editSec.id}/update` : '' %>" method="POST">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label" for="name">Nume Secțiune <span class="req">*</span></label>
+            <input type="text" id="name" name="name" class="form-control" value="<%= editSec ? editSec.name : '' %>" required />
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="description">Descriere</label>
+            <input type="text" id="description" name="description" class="form-control" value="<%= editSec ? editSec.description : '' %>" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="sec_display_order">Ordine</label>
+            <input type="number" id="sec_display_order" name="display_order" class="form-control" value="<%= editSec ? editSec.display_order : 0 %>" />
+          </div>
+        </div>
+        <div class="form-actions" style="margin-top:16px;">
+          <button type="submit" class="btn btn-primary">
+            <%= editSec ? ' Actualizează' : ' Adaugă' %>
+          </button>
+          <% if (editSec) { %>
+            <a href="/admin/informatii-publice" class="btn btn-ghost">Anulează</a>
+          <% } %>
+        </div>
+      </form>
+    </div>
+
+    <div class="admin-card" style="margin-top: 24px;">
+      <div class="admin-card-header">
+        <span class="admin-card-title">Secțiuni (<%= sections.length %>)</span>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Ord</th>
+              <th>Nume</th>
+              <th>Acțiuni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (sections.length === 0) { %>
+              <tr><td colspan="3" class="text-center" style="padding: 20px;">Nicio secțiune.</td></tr>
+            <% } else { %>
+              <% sections.forEach(sec => { %>
+                <tr>
+                  <td><%= sec.display_order %></td>
+                  <td style="font-weight: 600;"><%= sec.name %></td>
+                  <td>
+                    <div style="display: flex; gap: 8px;">
+                      <a href="/admin/informatii-publice?editSec=<%= sec.id %>" class="btn btn-secondary btn-sm">Editează</a>
+                      <form action="/admin/informatii-publice/sections/<%= sec.id %>/delete" method="POST" style="margin:0;" onsubmit="return confirm('Ștergerea secțiunii va șterge și documentele ei. Continuăm?');">
+                        <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <!-- Documents Panel -->
+  <div>
+    <div class="edit-panel">
+      <p class="edit-panel-title">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+        <%= editDoc ? 'Editare document: ' + editDoc.title : 'Adaugă document nou' %>
+      </p>
+      <form action="/admin/informatii-publice/documents<%= editDoc ? `/${editDoc.id}/update` : '' %>" method="POST">
+        <div class="form-grid">
+          <div class="form-group full">
+            <label class="form-label" for="section_id">Secțiune <span class="req">*</span></label>
+            <select id="section_id" name="section_id" class="form-control" required>
+              <option value="">Alege o secțiune...</option>
+              <% sections.forEach(sec => { %>
+                <option value="<%= sec.id %>" <%= editDoc && editDoc.section_id === sec.id ? 'selected' : '' %>><%= sec.name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="title">Titlu Document <span class="req">*</span></label>
+            <input type="text" id="title" name="title" class="form-control" value="<%= editDoc ? editDoc.title : '' %>" required />
+          </div>
+          <div class="form-group full">
+            <label class="form-label" for="url">URL / Link către document <span class="req">*</span></label>
+            <input type="text" id="url" name="url" class="form-control" value="<%= editDoc ? editDoc.url : '' %>" required placeholder="ex: /resurse/docs/reg.pdf sau https://..." />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="doc_display_order">Ordine de Afișare</label>
+            <input type="number" id="doc_display_order" name="display_order" class="form-control" value="<%= editDoc ? editDoc.display_order : 0 %>" />
+          </div>
+        </div>
+        <div class="form-actions" style="margin-top:16px;">
+          <button type="submit" class="btn btn-primary" <%= sections.length === 0 ? 'disabled' : '' %>>
+            <%= editDoc ? ' Actualizează' : ' Adaugă' %>
+          </button>
+          <% if (editDoc) { %>
+            <a href="/admin/informatii-publice" class="btn btn-ghost">Anulează</a>
+          <% } %>
+        </div>
+      </form>
+    </div>
+
+    <div class="admin-card" style="margin-top: 24px;">
+      <div class="admin-card-header">
+        <span class="admin-card-title">Documente (<%= documents.length %>)</span>
+      </div>
+      <div class="admin-table-wrap">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>Ord</th>
+              <th>Secțiune</th>
+              <th>Titlu</th>
+              <th>Acțiuni</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% if (documents.length === 0) { %>
+              <tr><td colspan="4" class="text-center" style="padding: 20px;">Niciun document.</td></tr>
+            <% } else { %>
+              <% documents.forEach(doc => { 
+                const sec = sections.find(s => s.id === doc.section_id);
+              %>
+                <tr>
+                  <td><%= doc.display_order %></td>
+                  <td style="font-size: 0.85em; color: var(--text2);"><%= sec ? sec.name : 'N/A' %></td>
+                  <td style="font-weight: 600;"><%= doc.title %> <br/><a href="<%= doc.url %>" target="_blank" style="font-size: 0.8em; font-weight: normal; color: var(--p600);">link</a></td>
+                  <td>
+                    <div style="display: flex; gap: 8px;">
+                      <a href="/admin/informatii-publice?editDoc=<%= doc.id %>" class="btn btn-secondary btn-sm">Editează</a>
+                      <form action="/admin/informatii-publice/documents/<%= doc.id %>/delete" method="POST" style="margin:0;" onsubmit="return confirm('Sigur vrei să ștergi acest document?');">
+                        <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
+                      </form>
+                    </div>
+                  </td>
+                </tr>
+              <% }) %>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<%- include('../partials/admin-layout-bottom') %>

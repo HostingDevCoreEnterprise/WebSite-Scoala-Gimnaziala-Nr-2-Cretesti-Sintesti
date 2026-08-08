@@ -1,0 +1,84 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header', { currentPage: 'comisii' }) %>
+
+<main>
+  <div class="page-hero">
+    <div class="container">
+      <nav class="page-hero-breadcrumb"><a href="/">Acasă</a><span>/</span><span>Comisii Curriculum</span></nav>
+      <h1 class="page-hero-title"> Comisii de Curriculum</h1>
+      <p class="page-hero-sub">Structurile de specialitate care coordonează activitatea didactică pe arii curriculare.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <% if (commissions.length === 0 && tab !== 'despre') { %>
+      <div class="empty-state reveal">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="48" height="48" rx="6"/><path d="M20 24h24M20 32h16M20 40h12"/></svg>
+        <h3>Nicio comisie adăugată</h3>
+        <p>Administratorul poate adăuga comisii din panoul de administrare.</p>
+      </div>
+      <% } else { %>
+
+      <!-- Tab bar -->
+      <div class="tabs-wrap">
+        <% commissions.forEach(c => { %>
+        <a href="/comisii?tab=<%= c.id %>"
+           class="tab-btn <%= tab == c.id ? 'active' : '' %>">
+          <%= c.name %>
+        </a>
+        <% }) %>
+      </div>
+
+      <!-- Commission content -->
+      <% if (activeCommission) { %>
+        <!-- Commission description -->
+        <% if (activeCommission.description) { %>
+        <div class="card reveal" style="margin-bottom:24px;">
+          <div class="card-body">
+            <p class="section-label">Comisie</p>
+            <h2 style="font-size:1.4rem;font-weight:800;margin-bottom:12px;"><%= activeCommission.name %></h2>
+            <div class="rich-content"><%- activeCommission.description %></div>
+          </div>
+        </div>
+        <% } %>
+
+        <!-- Teachers -->
+        <div class="section-head" style="margin-top:8px;">
+          <p class="section-label">Membrii comisiei</p>
+          <h3 class="section-title">Profesori</h3>
+        </div>
+
+        <% if (teachers.length === 0) { %>
+        <div class="empty-state">
+          <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="32" cy="20" r="12"/><path d="M8 56c0-13.25 10.75-24 24-24s24 10.75 24 24"/></svg>
+          <h3>Niciun profesor adăugat</h3>
+          <p>Administratorul poate adăuga profesori din panoul de administrare.</p>
+        </div>
+        <% } else { %>
+        <div class="teacher-grid">
+          <% teachers.forEach((t, i) => { %>
+          <div class="teacher-card reveal reveal-delay-<%= Math.min(i+1,4) %>">
+            <% if (t.photo_url) { %>
+              <img src="<%= t.photo_url %>" alt="<%= t.name %>" class="teacher-avatar"
+                   onerror="this.style.display='none';this.nextElementSibling.style.display='flex'" />
+              <div class="teacher-avatar-ph" style="display:none;"><%= t.name.charAt(0).toUpperCase() %></div>
+            <% } else { %>
+              <div class="teacher-avatar-ph"><%= t.name.charAt(0).toUpperCase() %></div>
+            <% } %>
+            <h3 class="teacher-name"><%= t.name %></h3>
+            <% if (t.subject) { %><p class="teacher-subject"><%= t.subject %></p><% } %>
+            <% if (t.bio) { %><p class="teacher-bio"><%= t.bio %></p><% } %>
+          </div>
+          <% }) %>
+        </div>
+        <% } %>
+      <% } %>
+      <% } %>
+
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer', { settings }) %>

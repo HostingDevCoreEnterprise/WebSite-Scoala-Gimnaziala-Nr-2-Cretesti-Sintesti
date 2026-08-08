@@ -1,0 +1,97 @@
+<%- include('../partials/admin-layout-top', { currentSection: 'utilizatori' }) %>
+
+<div class="dashboard-grid" style="display:grid;grid-template-columns:1fr 380px;gap:24px;align-items:start;">
+
+  <!-- User list -->
+  <div class="admin-card">
+    <div class="admin-card-header">
+      <span class="admin-card-title">Conturi admin (<%= users.length %>)</span>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>Utilizator</th><th>Nume</th><th>Creat de</th><th>Data creare</th><th>Acțiuni</th></tr></thead>
+        <tbody>
+          <% users.forEach(u => { %>
+          <tr>
+            <td style="font-weight:700;"><%= u.username %> <% if(u.id === user.id){ %><span class="badge badge-normal" style="font-size:.6rem;">Tu</span><% } %></td>
+            <td><%= u.display_name || '—' %></td>
+            <td style="color:var(--text3);font-size:.82rem;"><%= u.created_by_name || 'sistem' %></td>
+            <td style="white-space:nowrap;"><%= new Date(u.created_at).toLocaleDateString('ro-RO') %></td>
+            <td class="actions">
+              <!-- Change password modal trigger -->
+              <button class="btn btn-ghost btn-sm"
+                      onclick="showPassForm('<%= u.id %>','<%= u.username %>')"> Parolă</button>
+              <% if (u.id !== user.id) { %>
+              <form action="/admin/utilizatori/<%= u.id %>/delete" method="POST" style="display:inline;">
+                <button type="submit" class="btn btn-danger btn-sm"
+                        data-confirm="Ștergi contul «<%= u.username %>»?">Șterge</button>
+              </form>
+              <% } %>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Add user + Change password -->
+  <div>
+    <div class="edit-panel">
+      <p class="edit-panel-title"> Cont admin nou</p>
+      <form action="/admin/utilizatori" method="POST">
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label">Utilizator <span class="req">*</span></label>
+          <input type="text" name="username" class="form-control" placeholder="prof.popescu" required autocomplete="off" />
+        </div>
+        <div class="form-group" style="margin-bottom:12px;">
+          <label class="form-label">Nume afișat</label>
+          <input type="text" name="display_name" class="form-control" placeholder="Prof. Ion Popescu" />
+        </div>
+        <div class="form-group" style="margin-bottom:16px;">
+          <label class="form-label">Parolă <span class="req">*</span></label>
+          <input type="password" name="password" class="form-control" placeholder="Minim 6 caractere" required autocomplete="new-password" />
+        </div>
+        <button type="submit" class="btn btn-primary btn-full"> Crează contul</button>
+      </form>
+    </div>
+
+    <!-- Change password panel (hidden by default) -->
+    <div class="edit-panel" id="passPanel" style="display:none;">
+      <p class="edit-panel-title" id="passPanelTitle"> Schimbare parolă</p>
+      <form id="passForm" action="" method="POST">
+        <div class="form-group" style="margin-bottom:16px;">
+          <label class="form-label">Parolă nouă <span class="req">*</span></label>
+          <input type="password" name="new_password" class="form-control" placeholder="Minim 6 caractere" required />
+        </div>
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary btn-sm"> Schimbă</button>
+          <button type="button" class="btn btn-ghost btn-sm" onclick="hidePassForm()">Anulează</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="admin-card">
+      <div class="admin-card-body">
+        <p style="font-size:.82rem;color:var(--text3);line-height:1.7;">
+          ️ <strong style="color:var(--text2);">Notă de securitate:</strong><br/>
+          Nu poți șterge propriul cont. Parola implicită este <code>admin123</code> — schimb-o imediat dacă nu ai făcut-o deja.
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+function showPassForm(id, username) {
+  document.getElementById('passPanel').style.display = 'block';
+  document.getElementById('passPanelTitle').textContent = ' Schimbare parolă — ' + username;
+  document.getElementById('passForm').action = '/admin/utilizatori/' + id + '/parola';
+  document.getElementById('passPanel').scrollIntoView({ behavior:'smooth' });
+}
+function hidePassForm() {
+  document.getElementById('passPanel').style.display = 'none';
+}
+</script>
+
+<%- include('../partials/admin-layout-bottom') %>

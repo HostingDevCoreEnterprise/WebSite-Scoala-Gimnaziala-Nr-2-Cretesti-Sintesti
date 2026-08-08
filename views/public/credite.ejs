@@ -1,0 +1,499 @@
+<%- include('../partials/head') %>
+
+  <!-- Tech-themed custom styles for this page only -->
+  <style>
+    :root {
+      --dev-bg: #0a0a0f;
+      --dev-card: #15151e;
+      --dev-primary: #3b82f6;
+      --dev-cyan: #06b6d4;
+      --dev-purple: #8b5cf6;
+      --dev-text: #e2e8f0;
+      --dev-text-muted: #94a3b8;
+    }
+
+    body {
+      background-color: var(--dev-bg) !important;
+    }
+
+    .tech-page {
+      background-color: var(--dev-bg);
+      color: var(--dev-text);
+      font-family: 'Inter', sans-serif;
+      padding-bottom: 80px;
+    }
+
+    .back-btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-weight: 500;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transition: all 0.3s ease;
+      backdrop-filter: blur(10px);
+    }
+
+    .back-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      transform: translateX(-5px);
+    }
+
+    .tech-hero {
+      position: relative;
+      padding: 180px 0 120px;
+      background: linear-gradient(to bottom, rgba(10, 10, 15, 0.9), var(--dev-bg)), url('/images/credite1_738491.png') center/cover no-repeat fixed;
+      text-align: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tech-hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at center, transparent 0%, var(--dev-bg) 100%);
+    }
+
+    .tech-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .tech-badge {
+      display: inline-block;
+      padding: 8px 16px;
+      border-radius: 20px;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.2);
+      color: var(--dev-primary);
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin-bottom: 20px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .tech-title {
+      font-size: 4rem;
+      font-weight: 900;
+      margin-bottom: 20px;
+      background: linear-gradient(to right, #fff, var(--dev-text-muted));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      line-height: 1.1;
+    }
+
+    .tech-desc {
+      font-size: 1.2rem;
+      color: var(--dev-text-muted);
+      line-height: 1.8;
+    }
+
+    .tech-section {
+      padding: 100px 20px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tech-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .tech-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      .tech-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .tech-card {
+      background: var(--dev-card);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 20px;
+      padding: 40px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tech-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 2px;
+      background: linear-gradient(90deg, var(--dev-primary), var(--dev-purple));
+      opacity: 0.5;
+    }
+
+    .tech-image {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .tech-h2 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    .tech-p {
+      font-size: 1.1rem;
+      color: var(--dev-text-muted);
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+
+    .tech-logos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 40px;
+      align-items: center;
+      justify-items: center;
+      padding: 40px 0;
+    }
+
+    .tech-logo-img {
+      height: 120px;
+      opacity: 0.8;
+      transition: all 0.3s ease;
+    }
+
+    .tech-logo-img:hover {
+      opacity: 1;
+      transform: scale(1.05);
+    }
+
+    .tech-logo-invert {
+      filter: invert(1);
+    }
+
+    .tech-circular-skills {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-top: 30px;
+    }
+
+    .tech-circle-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      width: 130px;
+    }
+
+    .tech-circle-wrapper {
+      position: relative;
+      width: 100px;
+      height: 100px;
+    }
+
+    .tech-circle-svg {
+      width: 100%;
+      height: 100%;
+      transform: rotate(-90deg);
+    }
+
+    .tech-circle-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 8;
+    }
+
+    .tech-circle-progress {
+      fill: none;
+      stroke-width: 8;
+      stroke-linecap: round;
+      stroke-dasharray: 251.2;
+      /* 2 * pi * 40 (r=40) = 251.2 */
+      stroke-dashoffset: 251.2;
+    }
+
+    @keyframes circleFill40 {
+      to {
+        stroke-dashoffset: calc(251.2 - (251.2 * 0.40));
+      }
+    }
+
+    @keyframes circleFill35 {
+      to {
+        stroke-dashoffset: calc(251.2 - (251.2 * 0.35));
+      }
+    }
+
+    @keyframes circleFill15 {
+      to {
+        stroke-dashoffset: calc(251.2 - (251.2 * 0.15));
+      }
+    }
+
+    @keyframes circleFill10 {
+      to {
+        stroke-dashoffset: calc(251.2 - (251.2 * 0.10));
+      }
+    }
+
+    .tech-circle-progress.val-40 {
+      stroke: var(--dev-cyan);
+      animation: circleFill40 1.5s ease-out forwards 0.5s;
+    }
+
+    .tech-circle-progress.val-35 {
+      stroke: var(--dev-purple);
+      animation: circleFill35 1.5s ease-out forwards 0.5s;
+    }
+
+    .tech-circle-progress.val-15 {
+      stroke: #e44d26;
+      animation: circleFill15 1.5s ease-out forwards 0.5s;
+    }
+
+    .tech-circle-progress.val-10 {
+      stroke: #336791;
+      animation: circleFill10 1.5s ease-out forwards 0.5s;
+    }
+
+    .tech-circle-percent {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 1.2rem;
+      font-weight: 800;
+      color: #fff;
+    }
+
+    .tech-circle-label {
+      font-size: 0.85rem;
+      color: var(--dev-text-muted);
+      font-weight: 600;
+      text-align: center;
+      line-height: 1.4;
+    }
+  </style>
+
+  <div class="tech-page">
+    <a href="/" class="back-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;">
+        <path d="M19 12H5M12 19l-7-7 7-7" />
+      </svg>
+      Înapoi pe site
+    </a>
+
+    <!-- Hero Section -->
+    <div class="tech-hero">
+      <div class="tech-hero-content reveal">
+        <span class="tech-badge">Powered by</span>
+        <h1 class="tech-title">DevCore Enterprise</h1>
+        <p class="tech-desc">
+          Arhitectură tehnică de elită, securitate avansată și o experiență digitală premium, concepute pentru viitorul
+          educației.
+        </p>
+      </div>
+    </div>
+
+    <!-- Development Process Section -->
+    <div class="tech-section">
+      <div class="tech-container tech-grid">
+        <div class="reveal">
+          <h2 class="tech-h2">Metodologie & Echipă</h2>
+          <p class="tech-p">
+            Succesul acestui proiect se datorează unei echipe multidisciplinare formate din experți în UI/UX, ingineri
+            software și specialiști în securitate cibernetică. La <strong>DevCore Enterprise</strong>, credem că fiecare
+            produs digital trebuie să reflecte perfecțiunea și atenția la detalii.
+          </p>
+          <p class="tech-p">
+            Am folosit metodologii Agile (Scrum) pentru a livra rapid și eficient, având feedback continuu. Design-ul a
+            fost iterat de multiple ori pentru a oferi cea mai bună experiență posibilă utilizatorului final (elevi,
+            părinți, profesori), în timp ce echipa de backend s-a asigurat că infrastructura poate scala și rezista
+            oricărui volum de trafic.
+          </p>
+        </div>
+        <div class="reveal reveal-delay-1">
+          <img src="/images/credite2_940183.png" alt="Development Process" class="tech-image">
+        </div>
+      </div>
+    </div>
+
+    <!-- Tech Stack Section -->
+    <div class="tech-section" style="background: rgba(255,255,255,0.01);">
+      <div class="tech-container tech-grid">
+        <div class="reveal" style="order: 2; display: flex; flex-direction: column; gap: 30px;">
+          <img src="/images/credite3_518294.png" alt="Tech Stack" class="tech-image">
+          <img src="/images/credite4_597314.png" alt="Tehnologii" class="tech-image">
+        </div>
+        <div class="reveal reveal-delay-1" style="order: 1;">
+          <h2 class="tech-h2">Arhitectură & Tehnologii</h2>
+          <p class="tech-p">
+            Platforma este susținută de o stivă tehnologică modernă (Node.js, Express, Baze de date SQL/NoSQL hibride),
+            găzduită pe o infrastructură cloud scalabilă, garantând un uptime ridicat (99.9%) și timp de răspuns
+            instant.
+          </p>
+          <p class="tech-p">
+            Frontend-ul utilizează concepte avansate de CSS (Vanilla CSS, Glassmorphism) pentru performanță maximă, fără
+            bloatware-ul framework-urilor mari, rezultând într-un scor SEO și de Performanță impecabil.
+          </p>
+          <div class="tech-card" style="margin-top: 30px;">
+            <h3 style="color: #fff; font-size: 1.2rem; margin-bottom: 15px;">Inovații Implementate:</h3>
+            <ul style="list-style: none; padding: 0; color: var(--dev-text-muted); line-height: 2;">
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--dev-cyan);"></span> Sistem de Content Management (CMS) Ultra-Rapid
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--dev-purple);"></span> Randare Server-Side (EJS) optimizată extrem
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--dev-primary);"></span> Arhitectură de Securitate Multi-Layer
+              </li>
+              <li style="display: flex; align-items: center; gap: 10px;">
+                <span style="color: var(--dev-cyan);"></span> Micro-animații GPU Accelerated
+              </li>
+            </ul>
+          </div>
+
+          <div class="tech-card text-center" style="margin-top: 40px; padding: 40px 20px;">
+            <h3 style="color: #fff; font-size: 1.3rem; margin-bottom: 10px;">Distribuția Tehnologiilor</h3>
+            <p style="color: var(--dev-text-muted); font-size: 0.9rem; margin-bottom: 30px;">Compoziția stivei
+              tehnologice utilizate în proiect</p>
+
+            <div class="tech-circular-skills">
+              <div class="tech-circle-box">
+                <div class="tech-circle-wrapper">
+                  <svg class="tech-circle-svg" viewBox="0 0 100 100">
+                    <circle class="tech-circle-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="tech-circle-progress val-40" cx="50" cy="50" r="40"></circle>
+                  </svg>
+                  <div class="tech-circle-percent">40%</div>
+                </div>
+                <div class="tech-circle-label">Node.js / API</div>
+              </div>
+
+              <div class="tech-circle-box">
+                <div class="tech-circle-wrapper">
+                  <svg class="tech-circle-svg" viewBox="0 0 100 100">
+                    <circle class="tech-circle-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="tech-circle-progress val-35" cx="50" cy="50" r="40"></circle>
+                  </svg>
+                  <div class="tech-circle-percent">35%</div>
+                </div>
+                <div class="tech-circle-label">CSS / UI / UX</div>
+              </div>
+
+              <div class="tech-circle-box">
+                <div class="tech-circle-wrapper">
+                  <svg class="tech-circle-svg" viewBox="0 0 100 100">
+                    <circle class="tech-circle-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="tech-circle-progress val-15" cx="50" cy="50" r="40"></circle>
+                  </svg>
+                  <div class="tech-circle-percent">15%</div>
+                </div>
+                <div class="tech-circle-label">EJS / Randare</div>
+              </div>
+
+              <div class="tech-circle-box">
+                <div class="tech-circle-wrapper">
+                  <svg class="tech-circle-svg" viewBox="0 0 100 100">
+                    <circle class="tech-circle-bg" cx="50" cy="50" r="40"></circle>
+                    <circle class="tech-circle-progress val-10" cx="50" cy="50" r="40"></circle>
+                  </svg>
+                  <div class="tech-circle-percent">10%</div>
+                </div>
+                <div class="tech-circle-label">PostgreSQL / DB</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Ecosystem / Logos -->
+    <div class="tech-section">
+      <div class="tech-container text-center reveal">
+        <span class="tech-badge" style="margin-bottom: 10px;">Ecosistem</span>
+        <h2 class="tech-h2" style="margin-bottom: 40px; font-size: 2rem;">Parte din Abstract Group</h2>
+        <p class="tech-p" style="max-width: 800px; margin: 0 auto 50px;">
+          <strong>DevCore Enterprise</strong> face parte din familia <strong>Abyss Software</strong>, o divizie
+          tehnologică de elită a <strong>Abyss Holdings</strong>, un conglomerat diversificat care, la rândul său, este
+          parte integrantă a <strong>Abstract Group</strong>.
+        </p>
+
+        <div class="tech-logos">
+          <a href="https://devcoreenterprise.pages.dev/" target="_blank"><img src="/images/logo1_284756.png"
+              alt="DevCore" class="tech-logo-img tech-logo-invert"></a>
+          <a href="https://abysssoftware.pages.dev/" target="_blank"><img src="/images/logo2_619283.png"
+              alt="Abyss Software" class="tech-logo-img tech-logo-invert"></a>
+          <a href="https://abyssholdings.onrender.com/" target="_blank"><img src="/images/logo3_402819.png"
+              alt="Abyss Holdings" class="tech-logo-img"></a>
+          <a href="https://abstractgroup.onrender.com/" target="_blank"><img src="/images/logo4_583920.png"
+              alt="Abstract Group" class="tech-logo-img"></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Section -->
+    <div class="tech-section" style="background: rgba(255,255,255,0.01);">
+      <div class="tech-container text-center reveal">
+        <h2 class="tech-h2" style="font-size: 2rem; margin-bottom: 20px;">Contact & Colaborări</h2>
+        <p class="tech-p" style="max-width: 600px; margin: 0 auto 40px;">
+          Suntem mereu deschiși pentru proiecte noi, dezvoltare de platforme educaționale sau corporate și parteneriate
+          strategice.
+        </p>
+
+        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap;">
+          <a href="mailto:hello.devcore-enterprise@outlook.com"
+            style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 10px; color: #fff; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;"
+            onmouseover="this.style.background='var(--dev-primary)'; this.style.borderColor='var(--dev-primary)'"
+            onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="width: 20px; height: 20px;">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <path d="M22 6l-10 7L2 6" />
+            </svg>
+            hello.devcore-enterprise@outlook.com
+          </a>
+          <a href="mailto:management.abstract-group@outlook.com"
+            style="background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 15px 30px; border-radius: 10px; color: #fff; font-weight: 600; text-decoration: none; transition: all 0.3s ease; display: inline-flex; align-items: center; gap: 10px;"
+            onmouseover="this.style.background='var(--dev-purple)'; this.style.borderColor='var(--dev-purple)'"
+            onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.borderColor='rgba(255,255,255,0.1)'">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+              style="width: 20px; height: 20px;">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+              <path d="M22 6l-10 7L2 6" />
+            </svg>
+            management.abstract-group@outlook.com
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="/js/app.js"></script>
+  </body>
+
+  </html>

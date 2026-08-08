@@ -1,0 +1,27 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header', { currentPage: '' }) %>
+
+<main style="min-height: 80vh; display: flex; align-items: center; justify-content: center; padding: 40px 20px; background: var(--p50);">
+  <div style="text-align: center; max-width: 600px; background: white; padding: 60px 40px; border-radius: var(--r-xl); box-shadow: var(--sh-md);">
+    
+    <% if (locals.image) { %>
+      <div style="margin-bottom: 30px;">
+        <img src="/images/<%= image %>" alt="Eroare <%= statusCode %>" style="max-width: 250px; height: auto; border-radius: var(--r-lg); box-shadow: var(--sh-sm);" />
+      </div>
+    <% } %>
+
+    <h1 style="font-size: 5rem; font-weight: 900; color: var(--p600); margin-bottom: 10px; line-height: 1;">
+      <%= statusCode %>
+    </h1>
+    <h2 style="font-size: 1.8rem; font-weight: 700; color: var(--text); margin-bottom: 20px;">
+      <%= title %>
+    </h2>
+    <p style="font-size: 1.1rem; color: var(--text2); line-height: 1.6; margin-bottom: 30px;">
+      <%= message %>
+    </p>
+
+    <a href="/" class="btn btn-primary" style="display: inline-block;">Înapoi la Acasă</a>
+  </div>
+</main>
+
+<%- include('../partials/footer', { settings: locals.settings || {} }) %>

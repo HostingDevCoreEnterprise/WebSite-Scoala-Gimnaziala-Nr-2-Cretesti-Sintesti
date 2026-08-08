@@ -1,0 +1,43 @@
+<%- include('../partials/admin-layout-top') %>
+
+<div class="edit-panel" style="max-width: 1000px; margin: 0 auto;">
+  <div class="panel-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+    <h2> Mesaje Contact</h2>
+  </div>
+
+  <% if (messages && messages.length > 0) { %>
+    <div style="display: flex; flex-direction: column; gap: 15px;">
+      <% messages.forEach(msg => { %>
+        <div style="background: var(--bg); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 20px; box-shadow: var(--sh-sm);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 15px;">
+            <div>
+              <h3 style="font-size: 1.1rem; color: var(--text); margin-bottom: 5px;">
+                <%= msg.name %> 
+                <span style="font-size: 0.85rem; font-weight: normal; color: var(--text3);">(<a href="mailto:<%= msg.email %>" style="color: var(--p600);"><%= msg.email %></a>)</span>
+              </h3>
+              <p style="font-size: 0.9rem; color: var(--text2); font-weight: 600;">
+                Subiect: <%= msg.subject || 'Fără subiect' %>
+              </p>
+            </div>
+            <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 10px;">
+              <span style="font-size: 0.8rem; color: var(--text3);"><%= new Date(msg.created_at).toLocaleString('ro-RO') %></span>
+              <form action="/admin/mesaje/delete/<%= msg.id %>" method="POST" onsubmit="return confirm('Sigur doriți să ștergeți acest mesaj?');">
+                <button type="submit" class="btn btn-danger btn-sm">Șterge</button>
+              </form>
+            </div>
+          </div>
+          <div style="background: #fff; border: 1px solid var(--border); border-radius: var(--r-xs); padding: 15px; font-size: 0.95rem; color: var(--text); line-height: 1.6; white-space: pre-wrap;">
+            <%= msg.message %>
+          </div>
+        </div>
+      <% }) %>
+    </div>
+  <% } else { %>
+    <div class="empty-state">
+      <h3 style="font-size: 1.1rem; color: var(--text2); margin-bottom: 8px;">Niciun mesaj</h3>
+      <p style="font-size: 0.9rem; color: var(--text3);">Nu aveți niciun mesaj primit prin formularul de contact.</p>
+    </div>
+  <% } %>
+</div>
+
+<%- include('../partials/admin-layout-bottom') %>

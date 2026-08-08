@@ -1,0 +1,87 @@
+<%- include('../partials/head') %>
+  <%- include('../partials/header', { currentPage: 'absolvire' }) %>
+
+    <main>
+      <section class="page-header"
+        style="background: linear-gradient(135deg, var(--p800), var(--p900)); color: white; padding: 100px 0 60px;">
+        <div class="container text-center">
+          <h1 class="reveal">Absolvire</h1>
+          <p class="reveal reveal-delay-1"
+            style="font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 20px auto 0;">Momente de neuitat și
+            emoții la final de ciclu gimnazial</p>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+            <p style="font-size: 1.15rem; color: var(--text); line-height: 1.7;">
+              Sărbătorim fiecare generație prin ceremonii speciale și prin mult-așteptatul banchet organizat de școală.
+              Le urăm absolvenților noștri succes în drumul lor către liceu!
+            </p>
+          </div>
+
+          <!-- Images section -->
+          <div class="grid-2" style="gap: 30px; margin-bottom: 30px;">
+            <img src="/images/absolvire1_566207.jpg" alt="Absolvire"
+              style="width: 100%; border-radius: var(--r-md); box-shadow: 0 10px 25px rgba(0,0,0,0.1); object-fit: cover; height: 350px;">
+            <img src="/images/absolvire2_661368.jpg" alt="Absolvire"
+              style="width: 100%; border-radius: var(--r-md); box-shadow: 0 10px 25px rgba(0,0,0,0.1); object-fit: cover; height: 350px;">
+          </div>
+
+          <div style="margin-bottom: 60px; display: flex; justify-content: center;">
+            <img src="/images/absolvire3_673731.jpg" alt="Absolvire"
+              style="width: 100%; max-width: 800px; border-radius: var(--r-md); box-shadow: 0 10px 25px rgba(0,0,0,0.1); object-fit: cover; height: 400px; display: block; margin: 0 auto;">
+          </div>
+
+          <!-- Videos section -->
+          <div style="display: flex; flex-direction: column; gap: 40px; align-items: center;">
+
+            <!-- Festivitate -->
+            <div
+              style="width: 100%; max-width: 900px; background: white; border-radius: var(--r-lg); overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.08);">
+              <div
+                style="background: var(--p800); color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between;">
+                <h3 style="margin: 0; font-size: 1.25rem; font-weight: 700;">Festivitatea de Absolvire</h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width: 24px; height: 24px;">
+                  <path d="M23 7l-7 5 7 5V7z" />
+                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                </svg>
+              </div>
+              <div style="padding: 20px;">
+                <video controls
+                  style="width: 100%; border-radius: var(--r-sm); background: #000; outline: none; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+                  <source src="/videos/absolvire1_170220.MOV" type="video/mp4">
+                  Browserul dumneavoastră nu suportă redarea acestui videoclip.
+                </video>
+              </div>
+            </div>
+
+            <!-- Banchet -->
+            <div
+              style="width: 100%; max-width: 900px; background: white; border-radius: var(--r-lg); overflow: hidden; box-shadow: 0 15px 35px rgba(0,0,0,0.08);">
+              <div
+                style="background: var(--p600); color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between;">
+                <h3 style="margin: 0; font-size: 1.25rem; font-weight: 700;">Banchet</h3>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                  style="width: 24px; height: 24px;">
+                  <path d="M23 7l-7 5 7 5V7z" />
+                  <rect x="1" y="5" width="15" height="14" rx="2" ry="2" />
+                </svg>
+              </div>
+              <div style="padding: 20px;">
+                <video controls
+                  style="width: 100%; border-radius: var(--r-sm); background: #000; outline: none; box-shadow: inset 0 0 20px rgba(0,0,0,0.5);">
+                  <source src="/videos/absolvire2_802685.MOV" type="video/mp4">
+                  Browserul dumneavoastră nu suportă redarea acestui videoclip.
+                </video>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <%- include('../partials/footer', { settings: locals.settings || {} }) %>

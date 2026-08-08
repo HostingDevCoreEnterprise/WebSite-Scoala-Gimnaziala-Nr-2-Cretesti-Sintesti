@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <% const desc = typeof metaDesc !== 'undefined' ? metaDesc : 'Site oficial al Școlii Gimnaziale Nr. 2 Crețești-Sintești'; %>
+  <meta name="description" content="<%= desc %>" />
+  <title><%= title %></title>
+  
+  <!-- SEO Open Graph -->
+  <meta property="og:title" content="<%= title %>" />
+  <meta property="og:description" content="<%= desc %>" />
+  <meta property="og:type" content="website" />
+  <meta property="og:image" content="/images/logo.png" />
+  <meta property="og:locale" content="ro_RO" />
+  
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="<%= title %>" />
+  <meta name="twitter:description" content="<%= desc %>" />
+  <meta name="twitter:image" content="/images/logo.png" />
+  
+  <!-- Theme Color & Manifest -->
+  <meta name="theme-color" content="#1e3a8a" />
+  
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="icon" type="image/png" href="/images/logo.png" />
+  
+  <!-- Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "Școala Gimnazială Nr. 2 Crețești-Sintești",
+    "description": "Site-ul oficial al școlii gimnaziale",
+    "logo": "https://scoalacretestisintesti.ro/images/logo.png"
+  }
+  </script>
+</head>
+<body>

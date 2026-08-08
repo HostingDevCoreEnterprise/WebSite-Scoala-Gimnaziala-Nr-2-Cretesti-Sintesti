@@ -1,0 +1,78 @@
+<%- include('../partials/admin-layout-top', { currentSection: 'dashboard' }) %>
+
+<!-- Stats -->
+<div class="admin-stats">
+  <div class="admin-stat-card">
+    <div class="admin-stat-icon stat-icon-purple">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 010 8h-1M2 8h16v9a4 4 0 01-4 4H6a4 4 0 01-4-4V8z"/></svg>
+    </div>
+    <div class="admin-stat-num"><%= stats.announcements %></div>
+    <div class="admin-stat-label">Anunțuri active</div>
+  </div>
+  <div class="admin-stat-card">
+    <div class="admin-stat-icon stat-icon-blue">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+    </div>
+    <div class="admin-stat-num"><%= stats.commissions %></div>
+    <div class="admin-stat-label">Comisii</div>
+  </div>
+  <div class="admin-stat-card">
+    <div class="admin-stat-icon stat-icon-green">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+    </div>
+    <div class="admin-stat-num"><%= stats.teachers %></div>
+    <div class="admin-stat-label">Profesori</div>
+  </div>
+  <div class="admin-stat-card">
+    <div class="admin-stat-icon stat-icon-orange">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="4"/><path d="M6 20v-2a6 6 0 0112 0v2"/></svg>
+    </div>
+    <div class="admin-stat-num"><%= stats.users %></div>
+    <div class="admin-stat-label">Utilizatori admin</div>
+  </div>
+</div>
+
+<!-- Recent Announcements + Quick Actions -->
+<div class="dashboard-grid" style="display:grid;grid-template-columns:1fr 300px;gap:24px;align-items:start;">
+  <div class="admin-card">
+    <div class="admin-card-header">
+      <span class="admin-card-title">Anunțuri recente</span>
+      <a href="/admin/anunturi" class="btn btn-secondary btn-sm">Toate anunțurile →</a>
+    </div>
+    <div class="admin-table-wrap">
+      <table class="admin-table">
+        <thead><tr><th>Titlu</th><th>Prioritate</th><th>Data</th><th>Acțiuni</th></tr></thead>
+        <tbody>
+          <% if (recentAnn.length === 0) { %>
+          <tr><td colspan="4" style="text-align:center;color:var(--text3);padding:24px;">Niciun anunț.</td></tr>
+          <% } %>
+          <% recentAnn.forEach(ann => { %>
+          <tr>
+            <td style="font-weight:600;max-width:300px;"><%= ann.title %></td>
+            <td><span class="badge badge-<%= ann.priority %>"><%= ann.priority %></span></td>
+            <td style="white-space:nowrap;"><%= new Date(ann.published_at).toLocaleDateString('ro-RO') %></td>
+            <td class="actions">
+              <a href="/admin/anunturi/<%= ann.id %>/edit" class="btn btn-ghost btn-sm">Editează</a>
+            </td>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div>
+    <div class="admin-card">
+      <div class="admin-card-header"><span class="admin-card-title">Acțiuni rapide</span></div>
+      <div class="admin-card-body" style="display:flex;flex-direction:column;gap:10px;">
+        <a href="/admin/anunturi"   class="btn btn-primary btn-full"> Anunț nou</a>
+        <a href="/admin/comisii"    class="btn btn-secondary btn-full"> Gestionare comisii</a>
+
+        <a href="/admin/setari"     class="btn btn-secondary btn-full">️ Setări site</a>
+        <a href="/admin/utilizatori" class="btn btn-secondary btn-full"> Utilizatori</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('../partials/admin-layout-bottom') %>

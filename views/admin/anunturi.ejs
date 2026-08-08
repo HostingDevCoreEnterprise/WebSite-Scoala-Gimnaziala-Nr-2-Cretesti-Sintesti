@@ -1,0 +1,130 @@
+<%- include('../partials/admin-layout-top', { currentSection: 'anunturi' }) %>
+
+<!-- Add / Edit form -->
+<div class="edit-panel">
+  <% if (editing) { %>
+  <p class="edit-panel-title">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+    Editare anunț: "<%= editing.title %>"
+  </p>
+  <form action="/admin/anunturi/<%= editing.id %>/update" method="POST">
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label" for="title-edit">Titlu <span class="req">*</span></label>
+        <input type="text" id="title-edit" name="title" class="form-control" value="<%= editing.title %>" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="category-edit">Categorie</label>
+        <input type="text" id="category-edit" name="category" class="form-control" value="<%= editing.category %>" placeholder="General" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="priority-edit">Prioritate</label>
+        <select id="priority-edit" name="priority" class="form-control">
+          <option value="normal"    <%= editing.priority==='normal'    ? 'selected':'' %>>Normal</option>
+          <option value="important" <%= editing.priority==='important' ? 'selected':'' %>>Important</option>
+          <option value="urgent"    <%= editing.priority==='urgent'    ? 'selected':'' %>>Urgent</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="expires-edit">Expiră la (opțional)</label>
+        <input type="datetime-local" id="expires-edit" name="expires_at" class="form-control"
+               value="<%= editing.expires_at ? new Date(editing.expires_at).toISOString().slice(0,16) : '' %>" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="visible-edit">Vizibilitate</label>
+        <select id="visible-edit" name="is_visible" class="form-control">
+          <option value="on"  <%= editing.is_visible ? 'selected':'' %>>Vizibil</option>
+          <option value=""    <%= !editing.is_visible ? 'selected':'' %>>Ascuns</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="content-edit">Conținut <span class="req">*</span></label>
+        <textarea id="content-edit" name="content" class="form-control" rows="8" required><%= editing.content %></textarea>
+        <span class="form-hint">Poți folosi HTML simplu: &lt;b&gt;bold&lt;/b&gt;, &lt;p&gt;paragraf&lt;/p&gt;, &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;</span>
+      </div>
+    </div>
+    <div class="form-actions" style="margin-top:16px;">
+      <button type="submit" class="btn btn-primary"> Salvează modificările</button>
+      <a href="/admin/anunturi" class="btn btn-ghost">Anulează</a>
+    </div>
+  </form>
+  <% } else { %>
+  <p class="edit-panel-title">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+    Adaugă anunț nou
+  </p>
+  <form action="/admin/anunturi" method="POST">
+    <div class="form-grid">
+      <div class="form-group full">
+        <label class="form-label" for="title">Titlu <span class="req">*</span></label>
+        <input type="text" id="title" name="title" class="form-control" placeholder="Ex: Ședință cu părinții" required />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="category">Categorie</label>
+        <input type="text" id="category" name="category" class="form-control" placeholder="General" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="priority">Prioritate</label>
+        <select id="priority" name="priority" class="form-control">
+          <option value="normal">Normal</option>
+          <option value="important">Important</option>
+          <option value="urgent">Urgent</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="expires_at">Expiră la (opțional)</label>
+        <input type="datetime-local" id="expires_at" name="expires_at" class="form-control" />
+      </div>
+      <div class="form-group full">
+        <label class="form-label" for="content">Conținut <span class="req">*</span></label>
+        <textarea id="content" name="content" class="form-control" rows="6" placeholder="Scrie conținutul anunțului..." required></textarea>
+        <span class="form-hint">Poți folosi HTML simplu: &lt;b&gt;bold&lt;/b&gt;, &lt;p&gt;paragraf&lt;/p&gt;, &lt;ul&gt;&lt;li&gt;...&lt;/li&gt;&lt;/ul&gt;</span>
+      </div>
+    </div>
+    <div class="form-actions" style="margin-top:16px;">
+      <button type="submit" class="btn btn-primary"> Adaugă anunț</button>
+    </div>
+  </form>
+  <% } %>
+</div>
+
+<!-- List -->
+<div class="admin-card">
+  <div class="admin-card-header">
+    <span class="admin-card-title">Toate anunțurile (<%= announcements.length %>)</span>
+  </div>
+  <div class="admin-table-wrap">
+    <table class="admin-table">
+      <thead><tr><th>Titlu</th><th>Categorie</th><th>Prioritate</th><th>Vizibil</th><th>Adăugat</th><th>Acțiuni</th></tr></thead>
+      <tbody>
+        <% if (!announcements.length) { %>
+        <tr><td colspan="6" style="text-align:center;padding:24px;color:var(--text3);">Niciun anunț. Adaugă primul!</td></tr>
+        <% } %>
+        <% announcements.forEach(ann => { %>
+        <tr>
+          <td style="font-weight:600;max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><%= ann.title %></td>
+          <td><%= ann.category || '—' %></td>
+          <td><span class="badge badge-<%= ann.priority %>"><%= ann.priority %></span></td>
+          <td>
+            <form action="/admin/anunturi/<%= ann.id %>/toggle" method="POST" style="display:inline;">
+              <button type="submit" class="badge <%= ann.is_visible ? 'badge-success' : 'badge-muted' %>" style="cursor:pointer;border:none;">
+                <%= ann.is_visible ? ' Da' : ' Nu' %>
+              </button>
+            </form>
+          </td>
+          <td style="white-space:nowrap;"><%= new Date(ann.published_at).toLocaleDateString('ro-RO') %></td>
+          <td class="actions">
+            <a href="/admin/anunturi/<%= ann.id %>/edit" class="btn btn-ghost btn-sm">️ Edit</a>
+            <form action="/admin/anunturi/<%= ann.id %>/delete" method="POST" style="display:inline;">
+              <button type="submit" class="btn btn-danger btn-sm"
+                      data-confirm="Ștergi anunțul «<%= ann.title %>»?">️ Șterge</button>
+            </form>
+          </td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<%- include('../partials/admin-layout-bottom') %>

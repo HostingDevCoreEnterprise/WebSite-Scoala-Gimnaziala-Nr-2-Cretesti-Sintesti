@@ -1,0 +1,39 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header', { currentPage: 'profesori' }) %>
+
+<main>
+  <section class="page-header" style="background: linear-gradient(135deg, var(--p800), var(--p900)); color: white; padding: 100px 0 60px;">
+    <div class="container text-center">
+      <h1 class="reveal">Profesorii Noștri</h1>
+      <p class="reveal reveal-delay-1" style="font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 20px auto 0;">Echipa de cadre didactice dedicate, pregătite pentru viitor</p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      
+      <!-- Subnavigation Profesori -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 50px;">
+        <a href="/profesori" class="btn btn-primary">‍ Despre Profesori</a>
+        <a href="/comisii" class="btn btn-secondary"> Comisii Curriculum</a>
+      </div>
+      <div style="text-align: center; max-width: 800px; margin: 0 auto 50px;">
+        <p style="font-size: 1.15rem; color: var(--text); line-height: 1.7;">
+          Profesorii noștri participă constant la activități de formare profesională și cursuri de perfecționare pentru a fi pregătiți să abordeze educația viitorului. Prin inovație și dăruire, ei inspiră elevii să obțină cele mai bune rezultate.
+        </p>
+      </div>
+
+      <div class="grid-2" style="gap: 40px; margin-bottom: 40px;">
+        <img src="/images/profesori1_584174.jpg" alt="Profesori la formare" style="width: 100%; border-radius: var(--r-md); box-shadow: var(--sh-md);">
+        <img src="/images/profesori2_521337.jpg" alt="Colaborare profesori" style="width: 100%; border-radius: var(--r-md); box-shadow: var(--sh-md);">
+      </div>
+      
+      <div class="grid-2" style="gap: 40px;">
+        <img src="/images/profesori3_935630.jpg" alt="Activități didactice" style="width: 100%; border-radius: var(--r-md); box-shadow: var(--sh-md);">
+        <img src="/images/profesori4_938478.jpg" alt="Cancelarie" style="width: 100%; border-radius: var(--r-md); box-shadow: var(--sh-md);">
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer', { settings: locals.settings || {} }) %>

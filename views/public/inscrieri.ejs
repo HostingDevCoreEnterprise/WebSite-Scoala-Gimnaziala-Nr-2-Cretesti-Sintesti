@@ -1,0 +1,62 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header', { currentPage: 'inscrieri' }) %>
+
+<main>
+  <section class="page-header" style="background: linear-gradient(135deg, var(--p800), var(--p900)); color: white; padding: 100px 0 60px;">
+    <div class="container text-center">
+      <h1 class="reveal">Procedură de Înscrieri</h1>
+      <p class="reveal reveal-delay-1" style="font-size: 1.25rem; opacity: 0.9; max-width: 600px; margin: 20px auto 0;">Informații privind înscrierea elevilor pentru anul școlar <%= stats ? stats.year : 'curent' %></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      
+      <% if (stats) { %>
+      <div style="display: flex; justify-content: center; gap: 40px; margin-bottom: 50px; background: white; padding: 30px; border-radius: var(--r-lg); box-shadow: var(--sh-md);">
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; font-weight: 900; color: var(--p600);"><%= stats.total_seats %></div>
+          <div style="font-size: 1rem; color: var(--text2); font-weight: 600; text-transform: uppercase;">Locuri Totale</div>
+        </div>
+        <div style="width: 2px; background: var(--p100);"></div>
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; font-weight: 900; color: var(--s500);"><%= stats.occupied_seats %></div>
+          <div style="font-size: 1rem; color: var(--text2); font-weight: 600; text-transform: uppercase;">Locuri Ocupate</div>
+        </div>
+        <div style="width: 2px; background: var(--p100);"></div>
+        <div style="text-align: center;">
+          <div style="font-size: 3rem; font-weight: 900; color: var(--success, #10b981);"><%= Math.max(0, stats.total_seats - stats.occupied_seats) %></div>
+          <div style="font-size: 1rem; color: var(--text2); font-weight: 600; text-transform: uppercase;">Locuri Libere</div>
+        </div>
+      </div>
+      <% } %>
+
+      <div class="card" style="margin-bottom: 30px;">
+        <div class="card-body">
+          <h2 style="color: var(--p700); margin-bottom: 15px; font-size: 1.5rem; font-weight: 700;">
+            Elevii din circumscripția școlii
+          </h2>
+          <p style="color: var(--text); line-height: 1.7; font-size: 1.1rem;">
+            Toți elevii care locuiesc (au domiciliul) în perimetrul (circumscripția) școlii trebuie să se prezinte personal la <strong>secretariatul școlii</strong> împreună cu părintele sau tutorele legal pentru a fi înscriși automat pe locurile disponibile. Este o procedură simplă pentru care veți avea nevoie de actele de identitate.
+          </p>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-body">
+          <h2 style="color: var(--p700); margin-bottom: 15px; font-size: 1.5rem; font-weight: 700;">
+            Elevii din afara circumscripției
+          </h2>
+          <p style="color: var(--text); line-height: 1.7; font-size: 1.1rem;">
+            Pentru elevii care locuiesc în alte zone, înscrierea se poate face doar în limita locurilor rămase libere. Este necesară depunerea unui dosar la secretariat.
+          </p>
+          <p style="color: var(--text); line-height: 1.7; font-size: 1.1rem; margin-top: 15px;">
+            Fiecare dosar va fi analizat și <strong>aprobat de Consiliul de Administrație</strong> al școlii, ținându-se cont de capacitatea școlii și de regulamentele în vigoare.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer', { settings: locals.settings || {} }) %>

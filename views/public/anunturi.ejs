@@ -1,0 +1,64 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header', { currentPage: 'anunturi' }) %>
+
+<main>
+  <!-- Page Hero -->
+  <div class="page-hero">
+    <div class="container">
+      <nav class="page-hero-breadcrumb" aria-label="Breadcrumb">
+        <a href="/">Acasă</a><span>/</span><span>Anunțuri</span>
+      </nav>
+      <h1 class="page-hero-title"> Anunțuri</h1>
+      <p class="page-hero-sub">Toate noutățile și comunicatele oficiale ale școlii.</p>
+    </div>
+  </div>
+
+  <section class="section">
+    <div class="container">
+
+      <!-- Filter chips -->
+      <% if (categories.length > 0) { %>
+      <div class="filter-bar">
+        <a href="/anunturi" class="filter-chip <%= !activeCategory ? 'active' : '' %>">Toate</a>
+        <% categories.forEach(cat => { %>
+        <a href="/anunturi?category=<%= encodeURIComponent(cat) %>" class="filter-chip <%= activeCategory === cat ? 'active' : '' %>"><%= cat %></a>
+        <% }) %>
+      </div>
+      <% } %>
+
+      <!-- Announcements list -->
+      <% if (announcements.length === 0) { %>
+      <div class="empty-state">
+        <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5">
+          <circle cx="32" cy="32" r="28"/><path d="M32 20v14M32 40v2"/>
+        </svg>
+        <h3>Niciun anunț disponibil</h3>
+        <p>Reveniți mai târziu pentru noutăți.</p>
+      </div>
+      <% } else { %>
+        <% announcements.forEach((ann, i) => { %>
+        <div class="ann-list-card priority-<%= ann.priority %> reveal" style="transition-delay:<%= i * 0.05 %>s">
+          <div class="ann-list-header">
+            <div>
+              <h2 class="ann-list-title"><%= ann.title %></h2>
+              <div class="ann-meta" style="margin-top:6px;margin-bottom:0;">
+                <span class="ann-date">
+                  <%= new Date(ann.published_at).toLocaleDateString('ro-RO', { day:'numeric', month:'long', year:'numeric', hour:'2-digit', minute:'2-digit' }) %>
+                </span>
+                <% if (ann.category) { %><span class="badge badge-normal"><%= ann.category %></span><% } %>
+                <span class="badge badge-<%= ann.priority %>">
+                  <%= ann.priority === 'urgent' ? ' Urgent' : ann.priority === 'important' ? ' Important' : 'Normal' %>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div class="ann-list-content rich-content"><%- ann.content %></div>
+        </div>
+        <% }) %>
+      <% } %>
+
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer', { settings }) %>

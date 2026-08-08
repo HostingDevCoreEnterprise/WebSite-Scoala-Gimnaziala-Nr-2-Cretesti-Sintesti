@@ -1,0 +1,116 @@
+<%- include('../partials/admin-layout-top') %>
+
+<% if (editEvent) { %>
+<div class="admin-card" style="margin-bottom: 30px; border-left: 4px solid var(--primary);">
+  <div class="admin-card-header">
+    <h2 class="admin-card-title">Editează Eveniment (Clasa a <%= editEvent.grade_level === 2 ? 'II' : editEvent.grade_level === 4 ? 'IV' : editEvent.grade_level === 6 ? 'VI' : 'VIII' %>-a)</h2>
+  </div>
+  <div class="admin-card-body">
+    <form action="/admin/evaluare/<%= editEvent.id %>/update" method="POST" class="admin-form">
+      <input type="hidden" name="grade_level" value="<%= editEvent.grade_level %>" />
+      <div class="form-row">
+        <div class="form-group" style="flex:1;">
+          <label class="form-label">Data</label>
+          <input type="text" name="date_text" class="form-control" value="<%= editEvent.date_text %>" required />
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Descriere Eveniment</label>
+        <input type="text" name="event_description" class="form-control" value="<%= editEvent.event_description %>" required />
+      </div>
+      <div class="form-group" style="display:flex; align-items:center; gap:10px;">
+        <input type="checkbox" name="is_highlighted" id="is_highlighted" value="1" <%= editEvent.is_highlighted ? 'checked' : '' %>>
+        <label for="is_highlighted" style="margin:0; cursor:pointer;">Evidențiat (Text îngroșat / colorat)</label>
+      </div>
+      <div style="margin-top:20px; display:flex; gap:10px;">
+        <button type="submit" class="btn btn-primary">Salvează Modificările</button>
+        <a href="/admin/evaluare" class="btn btn-secondary">Anulează</a>
+      </div>
+    </form>
+  </div>
+</div>
+<% } %>
+
+<% 
+  const clsArray = [2, 4, 6, 8];
+  const clsNames = {2: 'Clasa a II-a', 4: 'Clasa a IV-a', 6: 'Clasa a VI-a', 8: 'Clasa a VIII-a'};
+%>
+
+<div style="display: flex; gap: 20px; flex-direction: column;">
+  <% clsArray.forEach(cls => { 
+       const evts = events.filter(e => e.grade_level === cls);
+  %>
+  <div class="admin-card">
+    <div class="admin-card-header" style="background: var(--p50); border-bottom: 1px solid var(--border1);">
+      <h2 class="admin-card-title" style="color: var(--p700);"><%= clsNames[cls] %></h2>
+    </div>
+    
+    <div class="table-responsive">
+      <table class="admin-table">
+        <thead>
+          <tr>
+            <th style="width: 20%;">Data</th>
+            <th style="width: 50%;">Descriere</th>
+            <th style="width: 15%;">Evidențiat</th>
+            <th style="width: 15%; text-align:right;">Acțiuni</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (evts.length === 0) { %>
+            <tr><td colspan="4" style="text-align:center; color:var(--text2); padding: 20px;">Nu există evenimente adăugate pentru <%= clsNames[cls] %>.</td></tr>
+          <% } else { %>
+            <% evts.forEach(evt => { %>
+              <tr>
+                <td><strong><%= evt.date_text %></strong></td>
+                <td><%= evt.event_description %></td>
+                <td>
+                  <% if (evt.is_highlighted) { %>
+                    <span class="badge" style="background:var(--success); color:white;">Da</span>
+                  <% } else { %>
+                    <span style="color:var(--text3); font-size: 0.9em;">-</span>
+                  <% } %>
+                </td>
+                <td style="text-align:right; white-space:nowrap;">
+                  <a href="/admin/evaluare?edit=<%= evt.id %>" class="btn btn-sm btn-secondary">Editează</a>
+                  <form action="/admin/evaluare/<%= evt.id %>/delete" method="POST" style="display:inline-block;" onsubmit="return confirm('Ești sigur că vrei să ștergi acest eveniment?');">
+                    <button class="btn btn-sm" style="background:var(--danger); color:white; border:none;">Șterge</button>
+                  </form>
+                </td>
+              </tr>
+            <% }) %>
+          <% } %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FORMULAR ADAUGARE RAPIDA -->
+    <div class="admin-card-body" style="background: var(--bg); border-top: 1px solid var(--border1);">
+      <h4 style="margin-top:0; margin-bottom: 15px; font-size:1rem; color: var(--text1);">+ Adaugă eveniment nou</h4>
+      <form action="/admin/evaluare" method="POST" style="display:flex; gap:15px; align-items:flex-end; flex-wrap:wrap;">
+        <input type="hidden" name="grade_level" value="<%= cls %>" />
+        
+        <div style="flex:1; min-width: 150px;">
+          <input type="text" name="date_text" class="form-control" required placeholder="Data (ex: 12 mai)" />
+        </div>
+        
+        <div style="flex:3; min-width: 250px;">
+          <input type="text" name="event_description" class="form-control" required placeholder="Descriere activitate..." />
+        </div>
+        
+        <div style="display:flex; align-items:center; gap:8px; margin-bottom:12px;">
+          <input type="checkbox" name="is_highlighted" value="1" id="hl_<%= cls %>">
+          <label for="hl_<%= cls %>" style="font-size:0.9rem; margin:0; cursor:pointer; color: var(--text2);">Evidențiat</label>
+        </div>
+        
+        <div>
+          <button type="submit" class="btn btn-primary" style="padding: 10px 15px; height: 42px;">
+            Adaugă
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <% }) %>
+</div>
+
+<%- include('../partials/admin-layout-bottom') %>
