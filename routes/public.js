@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
     const settings     = await getSettings();
 
     const { rows: announcements } = await pool.query(
-      `SELECT id, title, content, category, priority, published_at
+      `SELECT id, title, content, category, priority, published_at, photo_url
        FROM announcements
        WHERE is_visible = TRUE AND (expires_at IS NULL OR expires_at > NOW())
        ORDER BY published_at DESC LIMIT 3`
@@ -86,7 +86,7 @@ router.get('/anunturi', async (req, res) => {
     const settings = await getSettings();
     const { category } = req.query;
 
-    let query = `SELECT id, title, content, category, priority, published_at
+    let query = `SELECT id, title, content, category, priority, published_at, photo_url
                  FROM announcements
                  WHERE is_visible = TRUE AND (expires_at IS NULL OR expires_at > NOW())`;
     const params = [];

@@ -18,6 +18,10 @@
         <input type="text" id="category-edit" name="category" class="form-control" value="<%= editing.category %>" placeholder="General" />
       </div>
       <div class="form-group">
+        <label class="form-label" for="photo_url-edit">URL Fotografie</label>
+        <input type="text" id="photo_url-edit" name="photo_url" class="form-control" value="<%= editing.photo_url || '' %>" placeholder="/images/poza.jpeg" />
+      </div>
+      <div class="form-group">
         <label class="form-label" for="priority-edit">Prioritate</label>
         <select id="priority-edit" name="priority" class="form-control">
           <option value="normal"    <%= editing.priority==='normal'    ? 'selected':'' %>>Normal</option>
@@ -62,6 +66,10 @@
       <div class="form-group">
         <label class="form-label" for="category">Categorie</label>
         <input type="text" id="category" name="category" class="form-control" placeholder="General" />
+      </div>
+      <div class="form-group">
+        <label class="form-label" for="photo_url">URL Fotografie</label>
+        <input type="text" id="photo_url" name="photo_url" class="form-control" placeholder="/images/poza.jpeg" />
       </div>
       <div class="form-group">
         <label class="form-label" for="priority">Prioritate</label>

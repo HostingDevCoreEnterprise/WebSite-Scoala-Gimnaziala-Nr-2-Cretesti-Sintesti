@@ -66,21 +66,21 @@ router.get('/anunturi/:id/edit', requireAuth, async (req, res) => {
 });
 
 router.post('/anunturi', requireAuth, async (req, res) => {
-  const { title, content, category, priority, expires_at } = req.body;
+  const { title, content, category, priority, expires_at, photo_url } = req.body;
   await pool.query(
-    `INSERT INTO announcements (title,content,category,priority,expires_at,created_by)
-     VALUES ($1,$2,$3,$4,$5,$6)`,
-    [title, content, category||'General', priority||'normal', expires_at||null, req.session.user.id]
+    `INSERT INTO announcements (title,content,category,priority,expires_at,created_by,photo_url)
+     VALUES ($1,$2,$3,$4,$5,$6,$7)`,
+    [title, content, category||'General', priority||'normal', expires_at||null, req.session.user.id, photo_url||null]
   );
   flash(req,'success','Anunț adăugat cu succes!');
   res.redirect('/admin/anunturi');
 });
 
 router.post('/anunturi/:id/update', requireAuth, async (req, res) => {
-  const { title, content, category, priority, expires_at, is_visible } = req.body;
+  const { title, content, category, priority, expires_at, is_visible, photo_url } = req.body;
   await pool.query(
-    `UPDATE announcements SET title=$1,content=$2,category=$3,priority=$4,expires_at=$5,is_visible=$6 WHERE id=$7`,
-    [title, content, category||'General', priority||'normal', expires_at||null, !!is_visible, req.params.id]
+    `UPDATE announcements SET title=$1,content=$2,category=$3,priority=$4,expires_at=$5,is_visible=$6,photo_url=$7 WHERE id=$8`,
+    [title, content, category||'General', priority||'normal', expires_at||null, !!is_visible, photo_url||null, req.params.id]
   );
   flash(req,'success','Anunț actualizat!');
   res.redirect('/admin/anunturi');
