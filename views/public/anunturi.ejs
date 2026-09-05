@@ -52,6 +52,11 @@
               </div>
             </div>
           </div>
+          <% if (ann.photo_url) { %>
+          <div style="margin-bottom:12px;">
+            <img src="<%= ann.photo_url %>" alt="<%= ann.title %>" style="max-width: 100%; border-radius: 8px;" />
+          </div>
+          <% } %>
           <div class="ann-list-content rich-content"><%- ann.content %></div>
         </div>
         <% }) %>

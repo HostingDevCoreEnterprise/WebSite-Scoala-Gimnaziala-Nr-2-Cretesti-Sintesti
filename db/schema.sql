@@ -26,6 +26,7 @@ CREATE TABLE IF NOT EXISTS announcements (
   title        VARCHAR(255) NOT NULL,
   content      TEXT         NOT NULL,
   category     VARCHAR(80)  DEFAULT 'General',
+  photo_url    VARCHAR(500),
   priority     VARCHAR(20)  DEFAULT 'normal' CHECK (priority IN ('normal','important','urgent')),
   is_visible   BOOLEAN      DEFAULT TRUE,
   published_at TIMESTAMP    DEFAULT NOW(),

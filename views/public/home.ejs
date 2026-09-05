@@ -97,6 +97,11 @@
             </div>
             <h3 class="ann-title"><%= ann.title %></h3>
             <p class="ann-excerpt"><%= ann.content.replace(/<[^>]*>/g,'') %></p>
+            <% if (ann.photo_url) { %>
+            <div style="margin-top:12px;">
+              <img src="<%= ann.photo_url %>" alt="<%= ann.title %>" style="max-width: 100%; border-radius: 6px; display: block;" />
+            </div>
+            <% } %>
           </div>
         </div>
         <% }) %>
