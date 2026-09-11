@@ -1,5 +1,5 @@
 -- =============================================
--- SCHEMA: Scoala Gimnaziala Nr. 2 Cretesti-Sintesti
+-- SCHEMA: Scoala Gimnaziala Nr. 2 Cretesti
 -- =============================================
 
 -- Users (admin portal)

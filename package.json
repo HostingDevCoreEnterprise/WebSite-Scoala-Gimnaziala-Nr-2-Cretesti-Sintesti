@@ -1,7 +1,7 @@
 {
   "name": "scoala-gimnaziala-nr2-cretesti-sintesti",
   "version": "1.0.0",
-  "description": "Site oficial al Scolii Gimnaziale Nr. 2 Cretesti-Sintesti",
+  "description": "Site oficial al Scolii Gimnaziale Nr. 2 Cretesti",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

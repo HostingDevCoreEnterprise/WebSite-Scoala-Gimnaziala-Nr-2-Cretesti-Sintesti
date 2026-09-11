@@ -48,7 +48,7 @@ Render's free tier spins down web services after 15 minutes of inactivity. To pr
 ## 6. Domain Configuration (Optional)
 1. In your Render dashboard, select your web service and go to the **Settings** tab.
 2. Scroll down to **Custom Domains** and click **Add Custom Domain**.
-3. Enter your domain (e.g., `scoalacretestisintesti.ro`) and follow the DNS configuration instructions provided by Render to verify it.
+3. Enter your domain (e.g., `scoalacretesti.ro`) and follow the DNS configuration instructions provided by Render to verify it.
 
 ## Important Notes
 - **Images/Uploads**: Render has an ephemeral file system on the Free tier. Images added directly through the code (like the first article images) will work fine because they are in the GitHub repo. If you add an admin panel later with image uploads, you will need to set up a cloud storage bucket (like AWS S3 or Cloudinary) for those uploads, or attach a persistent Disk in Render (which requires a paid plan).

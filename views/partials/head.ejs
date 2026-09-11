@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <% const desc = typeof metaDesc !== 'undefined' ? metaDesc : 'Site oficial al Școlii Gimnaziale Nr. 2 Crețești-Sintești'; %>
+  <% const desc = typeof metaDesc !== 'undefined' ? metaDesc : 'Site oficial al Școlii Gimnaziale Nr. 2 Crețești'; %>
   <meta name="description" content="<%= desc %>" />
   <title><%= title %></title>
   
@@ -11,10 +11,10 @@
   <meta property="og:title" content="<%= title %>" />
   <meta property="og:description" content="<%= desc %>" />
   <meta property="og:type" content="<%= typeof article !== 'undefined' ? 'article' : 'website' %>" />
-  <meta property="og:image" content="<%= typeof article !== 'undefined' && article.featured_image ? 'https://scoalacretestisintesti.ro' + article.featured_image : 'https://scoalacretestisintesti.ro/images/logo.png' %>" />
+  <meta property="og:image" content="<%= typeof article !== 'undefined' && article.featured_image ? 'https://scoalacretesti.ro' + article.featured_image : 'https://scoalacretesti.ro/images/logo.png' %>" />
   <% if (typeof article !== 'undefined') { %>
     <meta property="article:published_time" content="<%= new Date(article.published_at).toISOString() %>" />
-    <meta property="article:author" content="Școala Gimnazială Nr. 2 Crețești-Sintești" />
+    <meta property="article:author" content="Școala Gimnazială Nr. 2 Crețești" />
     <meta property="article:section" content="<%= article.category || 'Noutăți' %>" />
   <% } %>
   <meta property="og:locale" content="ro_RO" />
@@ -23,7 +23,7 @@
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="<%= title %>" />
   <meta name="twitter:description" content="<%= desc %>" />
-  <meta name="twitter:image" content="<%= typeof article !== 'undefined' && article.featured_image ? 'https://scoalacretestisintesti.ro' + article.featured_image : 'https://scoalacretestisintesti.ro/images/logo.png' %>" />
+  <meta name="twitter:image" content="<%= typeof article !== 'undefined' && article.featured_image ? 'https://scoalacretesti.ro' + article.featured_image : 'https://scoalacretesti.ro/images/logo.png' %>" />
   
   <!-- Theme Color & Manifest -->
   <meta name="theme-color" content="#1e3a8a" />
@@ -41,14 +41,14 @@
     "@type": "BlogPosting",
     "headline": "<%= article.title %>",
     "image": [
-      "<%= article.featured_image ? 'https://scoalacretestisintesti.ro' + article.featured_image : 'https://scoalacretestisintesti.ro/images/logo.png' %>"
+      "<%= article.featured_image ? 'https://scoalacretesti.ro' + article.featured_image : 'https://scoalacretesti.ro/images/logo.png' %>"
     ],
     "datePublished": "<%= new Date(article.published_at).toISOString() %>",
     "dateModified": "<%= new Date(article.published_at).toISOString() %>",
     "author": [{
       "@type": "Organization",
-      "name": "Școala Gimnazială Nr. 2 Crețești-Sintești",
-      "url": "https://scoalacretestisintesti.ro"
+      "name": "Școala Gimnazială Nr. 2 Crețești",
+      "url": "https://scoalacretesti.ro"
     }]
   }
   </script>
@@ -57,9 +57,9 @@
   {
     "@context": "https://schema.org",
     "@type": "EducationalOrganization",
-    "name": "Școala Gimnazială Nr. 2 Crețești-Sintești",
+    "name": "Școala Gimnazială Nr. 2 Crețești",
     "description": "Site-ul oficial al școlii gimnaziale",
-    "logo": "https://scoalacretestisintesti.ro/images/logo.png"
+    "logo": "https://scoalacretesti.ro/images/logo.png"
   }
   </script>
   <% } %>

@@ -1,6 +1,6 @@
-# Școala Gimnazială Nr. 2 Crețești-Sintești
+# Școala Gimnazială Nr. 2 Crețești
 
-Official repository for the website of **Școala Gimnazială Nr. 2 Crețești-Sintești**. This project provides a modern, responsive, and SEO-optimized web platform designed to improve communication between the school, students, parents, teachers, and the local community. The website centralizes institutional information, school news, announcements, educational resources, contact details, and administrative content in a secure and accessible environment.
+Official repository for the website of **Școala Gimnazială Nr. 2 Crețești**. This project provides a modern, responsive, and SEO-optimized web platform designed to improve communication between the school, students, parents, teachers, and the local community. The website centralizes institutional information, school news, announcements, educational resources, contact details, and administrative content in a secure and accessible environment.
 
 ## Features
 
@@ -45,7 +45,7 @@ Official repository for the website of **Școala Gimnazială Nr. 2 Crețești-Si
 ### Clone the repository
 
 ```bash
-git clone git@github.com:HostingDevCoreEnterprise/WebSite-Scoala-Gimnaziala-Nr-2-Cretesti-Sintesti.git
+git clone git@github.com:HostingDevCoreEnterprise/WebSite-Scoala-Gimnaziala-Nr-2-Cretesti.git
 ```
 
 ### Install dependencies
@@ -97,4 +97,4 @@ Sensitive information such as API keys, database credentials, and session secret
 
 ## License
 
-This repository contains the source code for the official website of **Școala Gimnazială Nr. 2 Crețești-Sintești**. Unless otherwise specified, all rights are reserved.
+This repository contains the source code for the official website of **Școala Gimnazială Nr. 2 Crețești**. Unless otherwise specified, all rights are reserved.
