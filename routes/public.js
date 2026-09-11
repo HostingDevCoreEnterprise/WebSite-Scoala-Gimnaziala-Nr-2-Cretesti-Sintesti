@@ -317,7 +317,7 @@ router.get('/comisii', async (req, res) => {
     }
 
     res.render('public/comisii', {
-      title: 'Comisii Curriculum — ' + (settings.school_name || ''),
+      title: 'Comisii — ' + (settings.school_name || ''),
       settings, commissions, tab, teachers, activeCommission
     });
   } catch (err) {
