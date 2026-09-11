@@ -20,6 +20,9 @@
         <a href="/articole" class="nav-link <%= typeof currentPage !== 'undefined' && currentPage === 'articole' ? 'active' : '' %>">Articole</a>
       </li>
       <li class="nav-item">
+        <a href="/proiecte" class="nav-link <%= typeof currentPage !== 'undefined' && currentPage === 'proiecte' ? 'active' : '' %>">Proiecte</a>
+      </li>
+      <li class="nav-item">
         <a href="#"
           class="nav-link <%= ['elevi', 'inscrieri', 'activitati-extra', 'absolvire', 'evaluare-nationala'].includes(currentPage) ? 'active' : '' %>">
           Elevi
@@ -87,6 +90,7 @@
     <a href="/" class="nav-mobile-link <%= currentPage === 'home' ? 'active' : '' %>">Acasă</a>
     <a href="/anunturi" class="nav-mobile-link <%= currentPage === 'anunturi' ? 'active' : '' %>">Anunțuri</a>
     <a href="/articole" class="nav-mobile-link <%= typeof currentPage !== 'undefined' && currentPage === 'articole' ? 'active' : '' %>">Articole</a>
+    <a href="/proiecte" class="nav-mobile-link <%= typeof currentPage !== 'undefined' && currentPage === 'proiecte' ? 'active' : '' %>">Proiecte</a>
 
     <div class="nav-mobile-accordion">
       <button

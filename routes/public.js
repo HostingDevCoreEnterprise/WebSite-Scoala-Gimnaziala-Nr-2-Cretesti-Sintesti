@@ -169,6 +169,14 @@ router.get('/articole/:slug', async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
+// ── PROIECTE ───────────────────────────────────────────────────────────────────
+router.get('/proiecte', async (req, res, next) => {
+  try {
+    const settings = await getSettings();
+    res.render('public/proiecte', { title: 'Proiecte — ' + (settings.school_name || ''), settings });
+  } catch (err) { next(err); }
+});
+
 // ── ELEVI ──────────────────────────────────────────────────────────────────────
 router.get('/elevi', async (req, res, next) => {
   try {
