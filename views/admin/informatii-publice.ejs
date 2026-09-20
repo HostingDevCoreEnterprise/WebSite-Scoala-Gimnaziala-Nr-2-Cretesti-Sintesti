@@ -1,6 +1,19 @@
 <%- include('../partials/admin-layout-top', { currentSection: 'informatii-publice' }) %>
 
-<div class="dashboard-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start;">
+<style>
+  .dashboard-grid-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    align-items: start;
+  }
+  @media (max-width: 992px) {
+    .dashboard-grid-info {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+<div class="dashboard-grid dashboard-grid-info">
 
   <!-- Sections Panel -->
   <div>
