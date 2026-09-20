@@ -11,7 +11,7 @@
   --sidebar-w:260px;
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased;overflow-x:hidden;max-width:100vw}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 ul{list-style:none}
@@ -76,7 +76,7 @@ input,textarea,select{font-family:inherit;outline:none}
 .admin-card-body{padding:24px}
 
 /* ── TABLES ── */
-.admin-table-wrap{overflow-x:auto}
+.admin-table-wrap{overflow-x:auto;width:100%;display:block}
 .admin-table{width:100%;border-collapse:collapse;font-size:.875rem}
 .admin-table th{padding:10px 14px;text-align:left;font-size:.72rem;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;background:var(--bg);border-bottom:1px solid var(--border2)}
 .admin-table td{padding:13px 14px;border-bottom:1px solid var(--border2);color:var(--text2);vertical-align:middle}
