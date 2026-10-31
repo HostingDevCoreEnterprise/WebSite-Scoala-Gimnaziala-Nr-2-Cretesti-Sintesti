@@ -181,15 +181,35 @@ router.get('/proiecte', async (req, res, next) => {
 router.get('/elevi', async (req, res, next) => {
   try {
     const settings = await getSettings();
-    res.render('public/elevi', { title: 'Elevi — ' + (settings.school_name || ''), settings });
+    res.render('public/elevi', { title: 'Elevi — ' + (settings.school_name || ''), settings, currentPage: 'elevi' });
   } catch (err) { next(err); }
 });
 
-router.get('/inscrieri', async (req, res, next) => {
+router.get('/admitere', async (req, res, next) => {
   try {
     const settings = await getSettings();
     const { rows } = await pool.query(`SELECT * FROM enrollment_stats ORDER BY id DESC LIMIT 1`);
-    res.render('public/inscrieri', { title: 'Înscrieri — ' + (settings.school_name || ''), settings, stats: rows[0] || null });
+    res.render('public/admitere', { 
+      title: 'Admitere — ' + (settings.school_name || ''), 
+      settings, 
+      stats: rows[0] || null,
+      currentPage: 'admitere'
+    });
+  } catch (err) { next(err); }
+});
+
+router.get('/inscrieri', (req, res) => {
+  res.redirect(301, '/admitere');
+});
+
+router.get('/statutul-elevului', async (req, res, next) => {
+  try {
+    const settings = await getSettings();
+    res.render('public/statutul-elevului', { 
+      title: 'Statutul Elevului — ' + (settings.school_name || ''), 
+      settings,
+      currentPage: 'statutul-elevului'
+    });
   } catch (err) { next(err); }
 });
 

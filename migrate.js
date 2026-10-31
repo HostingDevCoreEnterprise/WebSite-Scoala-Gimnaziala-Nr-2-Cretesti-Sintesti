@@ -30,17 +30,45 @@ async function migrate() {
       );
     `);
     
-    // Insert default section
-    const sectionRes = await pool.query(`SELECT COUNT(*) FROM public_document_sections`);
-    if (parseInt(sectionRes.rows[0].count) === 0) {
+    // 1. Rename any existing 'Management' section to 'Management și Calitate'
+    await pool.query(`
+      UPDATE public_document_sections 
+      SET name = 'Management și Calitate', 
+          slug = 'management-si-calitate' 
+      WHERE name = 'Management' OR slug = 'management'
+    `);
+
+    // 2. Ensure 'Management și Calitate' exists
+    const mngCheck = await pool.query(`SELECT id FROM public_document_sections WHERE name = 'Management și Calitate' OR slug = 'management-si-calitate' LIMIT 1`);
+    if (mngCheck.rows.length === 0) {
       await pool.query(`
         INSERT INTO public_document_sections (name, slug, description, display_order)
-        VALUES ('Documente Generale', 'documente-generale', 'Documente de interes general', 0)
+        VALUES ('Management și Calitate', 'management-si-calitate', 'Documente de management instituțional, strategii și asigurarea calității', 1)
       `);
     }
 
-    const defaultSectionRes = await pool.query(`SELECT id FROM public_document_sections WHERE slug = 'documente-generale' LIMIT 1`);
-    const defaultSectionId = defaultSectionRes.rows.length ? defaultSectionRes.rows[0].id : 1;
+    // 3. Ensure 'Regulamente' exists
+    const regCheck = await pool.query(`SELECT id FROM public_document_sections WHERE name = 'Regulamente' OR slug = 'regulamente' LIMIT 1`);
+    let regulamenteId;
+    if (regCheck.rows.length === 0) {
+      const regInsert = await pool.query(`
+        INSERT INTO public_document_sections (name, slug, description, display_order)
+        VALUES ('Regulamente', 'regulamente', 'Regulamentul de Organizare și Funcționare (ROFUIP) și Regulamentul de Ordine Interioară (ROI)', 2)
+        RETURNING id
+      `);
+      regulamenteId = regInsert.rows[0].id;
+    } else {
+      regulamenteId = regCheck.rows[0].id;
+    }
+
+    // 4. Ensure 'Transparență Instituțională' exists
+    const transCheck = await pool.query(`SELECT id FROM public_document_sections WHERE name = 'Transparență Instituțională' OR slug = 'transparenta-institutionala' LIMIT 1`);
+    if (transCheck.rows.length === 0) {
+      await pool.query(`
+        INSERT INTO public_document_sections (name, slug, description, display_order)
+        VALUES ('Transparență Instituțională', 'transparenta-institutionala', 'Rapoarte anuale de activitate, buget, achiziții publice și documente de interes public', 3)
+      `);
+    }
 
     await pool.query(`
       CREATE TABLE IF NOT EXISTS public_documents (
@@ -53,13 +81,13 @@ async function migrate() {
       );
     `);
     
-    // Insert some defaults
+    // Insert some defaults if completely empty
     const docs = await pool.query('SELECT COUNT(*) FROM public_documents');
-    if (parseInt(docs.rows[0].count) === 0) {
+    if (parseInt(docs.rows[0].count) === 0 && regulamenteId) {
       await pool.query(`INSERT INTO public_documents (section_id, title, url) VALUES 
-        ($1, 'Regulament de Ordine Interioara', '#'),
-        ($1, 'Cerere de Inscriere tip', '#')
-      `, [defaultSectionId]);
+        ($1, 'Regulament de Ordine Interioară (ROI)', '#'),
+        ($1, 'Regulament de Organizare și Funcționare (ROFUIP)', '#')
+      `, [regulamenteId]);
     }
 
     await pool.query(`

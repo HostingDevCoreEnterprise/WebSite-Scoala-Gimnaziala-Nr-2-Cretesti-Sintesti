@@ -1,11 +1,11 @@
-<%- include('../partials/admin-layout-top', { currentSection: 'inscrieri' }) %>
+<%- include('../partials/admin-layout-top', { currentSection: typeof currentSection !== 'undefined' ? currentSection : 'admitere' }) %>
 
 <div class="edit-panel">
   <p class="edit-panel-title">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 21v-2a4 4 0 00-8 0v2"/><circle cx="12" cy="7" r="4"/></svg>
-    Configurare Locuri Înscrieri
+    Configurare Locuri Admitere
   </p>
-  <form action="/admin/inscrieri" method="POST">
+  <form action="/admin/admitere" method="POST">
     <div class="form-grid">
       <div class="form-group full">
         <label class="form-label" for="year">An Școlar <span class="req">*</span></label>

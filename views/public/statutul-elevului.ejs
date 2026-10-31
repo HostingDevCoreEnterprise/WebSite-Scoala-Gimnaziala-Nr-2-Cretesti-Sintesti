@@ -1,0 +1,211 @@
+<%- include('../partials/head') %>
+<%- include('../partials/header', { currentPage: 'statutul-elevului' }) %>
+
+<main>
+  <section class="page-header" style="background: linear-gradient(135deg, var(--p800), var(--p900)); color: white; padding: 100px 0 60px;">
+    <div class="container text-center">
+      <h1 class="reveal">Statutul Elevului</h1>
+      <p class="reveal reveal-delay-1" style="font-size: 1.25rem; opacity: 0.9; max-width: 650px; margin: 20px auto 0;">
+        Drepturile, responsabilitățile și normele de conduită ale elevilor în cadrul Școlii Gimnaziale Nr. 2 Crețești
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container" style="max-width: 900px;">
+
+      <!-- Subnavigation Elevi -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 45px;">
+        <a href="/elevi" class="btn btn-secondary"> Despre Elevi</a>
+        <a href="/admitere" class="btn btn-secondary"> Admitere</a>
+        <a href="/statutul-elevului" class="btn btn-primary"> Statutul Elevului</a>
+        <a href="/activitati-extra" class="btn btn-secondary"> Activități Extracuriculare</a>
+        <a href="/absolvire" class="btn btn-secondary"> Absolvire</a>
+        <a href="/evaluare-nationala" class="btn btn-secondary"> Evaluare Națională</a>
+      </div>
+
+      <!-- Preambul -->
+      <div class="card" style="margin-bottom: 40px; background: white; border-radius: var(--r-xl); padding: 30px; border-left: 6px solid var(--p600); box-shadow: var(--sh-md);">
+        <h2 style="color: var(--p800); font-size: 1.5rem; font-weight: 800; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px; color: var(--p600);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          Cadrul General și Valori
+        </h2>
+        <p style="color: var(--text); line-height: 1.8; font-size: 1.05rem; margin: 0;">
+          Statutul Elevului reglementează drepturile și îndatoririle elevilor înmatriculați în sistemul național de învățământ preuniversitar de stat, garantând un climat de siguranță, respect reciproc, echitate, transparență decizională și dezvoltare armonioasă. La Școala Gimnazială Nr. 2 Crețești, elevul se află în centrul procesului educațional.
+        </p>
+      </div>
+
+      <!-- Drepturile Elevilor -->
+      <div style="margin-bottom: 50px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <div style="display: inline-block; background: var(--p100); color: var(--p800); padding: 5px 16px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+            Capitolul I
+          </div>
+          <h2 style="color: var(--p800); font-size: 2rem; font-weight: 800; margin: 0;">Drepturile Elevilor</h2>
+          <p style="color: var(--text2); margin-top: 8px; font-size: 1.05rem;">Fiecare elev beneficiază de protecție, libertate de opinie și condiții optime de învățare</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px;">
+          
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(37, 99, 235, 0.1); color: var(--p600); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M12 14l9-5-9-5-9 5 9 5z"/><path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/></svg>
+            </div>
+            <h3 style="color: var(--p800); font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Educație de Calitate</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Acces gratuit la educație, săli de clasă modernizate, laboratoare, resurse didactice și sprijin de orientare școlară și consiliere psiho-pedagogică.
+            </p>
+          </div>
+
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(16, 185, 129, 0.1); color: var(--success, #10b981); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            </div>
+            <h3 style="color: var(--p800); font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Siguranță și Demnitate</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Protecție absolută împotriva oricărei forme de violență fizică, verbală, discriminare, hărțuire sau bullying în perimetrul școlii și la activitățile extrașcolare.
+            </p>
+          </div>
+
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(245, 158, 11, 0.1); color: var(--s500, #f59e0b); display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            </div>
+            <h3 style="color: var(--p800); font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Libertatea de Exprimare</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Dreptul de a exprima liber opinii argumentate, de a pune întrebări constructive profesorilor și de a participa la dezbateri școlare.
+            </p>
+          </div>
+
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(147, 51, 234, 0.1); color: #9333ea; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <h3 style="color: var(--p800); font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Evaluare Corectă</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Dreptul la o evaluare obiectivă, transparentă și la explicarea notelor obținute la lucrări de control sau teze semestriale.
+            </p>
+          </div>
+
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(236, 72, 153, 0.1); color: #ec4899; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            </div>
+            <h3 style="color: var(--p800); font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Reprezentare Democratică</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Dreptul de a alege reprezentanți și de a candida în Consiliul Școlar al Elevilor pentru a propune proiecte și îmbunătățiri.
+            </p>
+          </div>
+
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; transition: transform 0.2s, box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-3px)'" onmouseout="this.style.transform='none'">
+            <div style="width: 44px; height: 44px; border-radius: 12px; background: rgba(14, 165, 233, 0.1); color: #0ea5e9; display: flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 24px; height: 24px;"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            </div>
+            <h3 style="color: var(--p800); font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Recunoașterea Meritelor</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Premierea și recompensarea rezultatelor deosebite la învățătură, olimpiade, competiții sportive și activități de voluntariat.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Îndatoririle Elevilor -->
+      <div style="margin-bottom: 50px;">
+        <div style="text-align: center; margin-bottom: 30px;">
+          <div style="display: inline-block; background: var(--p100); color: var(--p800); padding: 5px 16px; border-radius: 999px; font-weight: 700; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">
+            Capitolul II
+          </div>
+          <h2 style="color: var(--p800); font-size: 2rem; font-weight: 800; margin: 0;">Îndatoririle și Obligațiile Elevilor</h2>
+          <p style="color: var(--text2); margin-top: 8px; font-size: 1.05rem;">Comportamente și responsabilități pentru un mediu educațional sigur și respectuos</p>
+        </div>
+
+        <div class="card" style="border-radius: var(--r-xl); padding: 30px; box-shadow: var(--sh-md);">
+          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 18px;">
+            
+            <li style="display: flex; gap: 15px; align-items: flex-start;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 16px; height: 16px;"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong style="color: var(--p800); font-size: 1.05rem;">Frecventarea cursurilor și punctualitate:</strong>
+                <span style="color: var(--text2); line-height: 1.6;"> Elevii au obligația de a participa regulat la toate orele din orar, de a fi punctuali și de a se pregăti temeinic pentru fiecare disciplină.</span>
+              </div>
+            </li>
+
+            <li style="display: flex; gap: 15px; align-items: flex-start;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 16px; height: 16px;"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong style="color: var(--p800); font-size: 1.05rem;">Respect reciproc și comportament civilizat:</strong>
+                <span style="color: var(--text2); line-height: 1.6;"> Manifestarea respectului față de colegi, profesori și personalul nedidactic, folosind un limbaj adecvat și refuzând orice atitudine agresivă sau discriminatorie.</span>
+              </div>
+            </li>
+
+            <li style="display: flex; gap: 15px; align-items: flex-start;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 16px; height: 16px;"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong style="color: var(--p800); font-size: 1.05rem;">Păstrarea bazei materiale:</strong>
+                <span style="color: var(--text2); line-height: 1.6;"> Utilizarea responsabilă a mobilierului, tablelor interactive, calculatoarelor și a manualelor școlare primite cu titlu gratuit.</span>
+              </div>
+            </li>
+
+            <li style="display: flex; gap: 15px; align-items: flex-start;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 16px; height: 16px;"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong style="color: var(--p800); font-size: 1.05rem;">Ținută vestimentară decentă:</strong>
+                <span style="color: var(--text2); line-height: 1.6;"> Purtarea unei ținute curate, sobre și decente, conform Regulamentului de Ordine Interioară al școlii.</span>
+              </div>
+            </li>
+
+            <li style="display: flex; gap: 15px; align-items: flex-start;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 2px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" style="width: 16px; height: 16px;"><polyline points="20 6 9 17 4 12"/></svg>
+              </div>
+              <div>
+                <strong style="color: var(--p800); font-size: 1.05rem;">Utilizarea dispozitivelor electronice:</strong>
+                <span style="color: var(--text2); line-height: 1.6;"> Telefoanele mobile și dispozitivele personale sunt ținute închise sau pe modul silențios în timpul orelor de curs, fiind utilizate exclusiv la solicitarea expresă a profesorului în scop didactic.</span>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+
+      <!-- Consiliul Elevilor & Consultare Document -->
+      <div class="grid-2" style="gap: 25px; margin-bottom: 20px;">
+        <div class="card" style="border-radius: var(--r-xl); padding: 30px;">
+          <h3 style="color: var(--p800); font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px; color: var(--p600);"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+            Consiliul Școlar al Elevilor
+          </h3>
+          <p style="color: var(--text2); line-height: 1.7; font-size: 0.95rem;">
+            Consiliul Elevilor este vocea elevilor noștri! Este organismul democratic care reprezintă nevoile și ideile colegilor în fața cadrelor didactice și organizează acțiuni civice, sportive și culturale.
+          </p>
+        </div>
+
+        <div class="card" style="border-radius: var(--r-xl); padding: 30px; background: var(--p50); border: 1px solid var(--p200);">
+          <h3 style="color: var(--p800); font-size: 1.3rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px; color: var(--p600);"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+            Documente Oficiale
+          </h3>
+          <p style="color: var(--text2); line-height: 1.7; font-size: 0.95rem; margin-bottom: 16px;">
+            Regulamentul de Organizare și Funcționare și Statutul Elevului pot fi consultate în format integral în secțiunea Informații Publice.
+          </p>
+          <a href="/informatii-publice" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px;">
+            <span>Vezi Regulamente & Documente</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<%- include('../partials/footer', { settings: locals.settings || {} }) %>

@@ -17,24 +17,55 @@
           <p style="font-size: 1.1rem; color: var(--text2);">Nu există documente publicate momentan.</p>
         </div>
       <% } else { %>
-        <div style="display: flex; flex-direction: column; gap: 40px;">
+        <!-- Secțiuni Quick Navigation -->
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 45px;">
           <% sections.forEach(section => { %>
-            <div class="document-section">
-              <h2 style="font-size: 1.75rem; color: var(--p800); margin-bottom: 10px; border-bottom: 2px solid var(--p200); padding-bottom: 10px;"><%= section.name %></h2>
+            <a href="#sec-<%= section.id %>" class="btn btn-secondary" style="font-size: 0.95rem; padding: 8px 18px; border-radius: 999px;">
+              <%= section.name %>
+            </a>
+          <% }) %>
+        </div>
+
+        <div style="display: flex; flex-direction: column; gap: 45px;">
+          <% sections.forEach(section => { 
+            const docs = groupedDocuments[section.id] || [];
+          %>
+            <div class="document-section" id="sec-<%= section.id %>" style="scroll-margin-top: 100px;">
+              <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 2px solid var(--p200); padding-bottom: 12px; margin-bottom: 12px;">
+                <h2 style="font-size: 1.6rem; color: var(--p800); margin: 0; font-weight: 800; display: flex; align-items: center; gap: 10px;">
+                  <div style="width: 34px; height: 34px; border-radius: 8px; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                  </div>
+                  <%= section.name %>
+                </h2>
+                <span style="font-size: 0.85rem; font-weight: 600; color: var(--text3); background: var(--p50); padding: 4px 12px; border-radius: 999px; border: 1px solid var(--p200);">
+                  <%= docs.length %> <%= docs.length === 1 ? 'document' : 'documente' %>
+                </span>
+              </div>
+
               <% if (section.description) { %>
-                <p style="color: var(--text2); margin-bottom: 20px;"><%= section.description %></p>
+                <p style="color: var(--text2); margin-bottom: 20px; line-height: 1.6;"><%= section.description %></p>
               <% } %>
               
-              <% const docs = groupedDocuments[section.id] || []; %>
               <% if (docs.length === 0) { %>
-                <p style="color: var(--text3); font-style: italic;">Niciun document în această secțiune.</p>
+                <div style="background: var(--p50, #f8fafc); border-left: 3px solid var(--p300); padding: 18px 24px; border-radius: var(--r-md); color: var(--text2); font-size: 0.95rem;">
+                  Documentele pentru secțiunea <strong><%= section.name %></strong> sunt în curs de actualizare pentru anul școlar curent.
+                </div>
               <% } else { %>
                 <div style="display: flex; flex-direction: column; gap: 15px;">
                   <% docs.forEach(doc => { %>
-                    <a href="<%= doc.url %>" target="_blank" class="card" style="display: block; text-decoration: none; transition: transform 0.3s ease, box-shadow 0.3s ease;" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='var(--sh-lg)'" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--sh-md)'">
-                      <div class="card-body" style="display: flex; justify-content: space-between; align-items: center; padding: 20px;">
-                        <h3 style="font-size: 1.25rem; color: var(--p700); margin: 0; font-weight: 600;"><%= doc.title %></h3>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="var(--p600)" stroke-width="2" style="width: 24px; height: 24px;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg>
+                    <a href="<%= doc.url %>" target="_blank" class="card" style="display: block; text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; border-radius: var(--r-md);" onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='var(--sh-lg)'" onmouseout="this.style.transform='none'; this.style.boxShadow='var(--sh-md)'">
+                      <div class="card-body" style="display: flex; justify-content: space-between; align-items: center; padding: 20px 24px;">
+                        <div style="display: flex; align-items: center; gap: 14px;">
+                          <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(37, 99, 235, 0.08); color: var(--p600); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                          </div>
+                          <h3 style="font-size: 1.15rem; color: var(--p800); margin: 0; font-weight: 600;"><%= doc.title %></h3>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 6px; color: var(--p600); font-weight: 600; font-size: 0.9rem;">
+                          <span>Deschide</span>
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                        </div>
                       </div>
                     </a>
                   <% }) %>

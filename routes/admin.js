@@ -280,21 +280,33 @@ router.post('/utilizatori/:id/parola', requireAuth, async (req, res) => {
   res.redirect('/admin/utilizatori');
 });
 
-// ── ÎNSCRIERI ──────────────────────────────────────────────────────────────────
-router.get('/inscrieri', requireAuth, async (req, res) => {
+// ── ADMITERE & ÎNSCRIERI ─────────────────────────────────────────────────────────
+router.get('/admitere', requireAuth, async (req, res) => {
   const { rows } = await pool.query(`SELECT * FROM enrollment_stats ORDER BY id DESC LIMIT 1`);
-  res.render('admin/inscrieri', { title: 'Locuri Înscrieri', stats: rows[0] || { year: '', total_seats: 0, occupied_seats: 0 } });
+  res.render('admin/inscrieri', { 
+    title: 'Locuri Admitere', 
+    currentSection: 'admitere',
+    stats: rows[0] || { year: '', total_seats: 0, occupied_seats: 0 } 
+  });
 });
 
-router.post('/inscrieri', requireAuth, async (req, res) => {
+router.post('/admitere', requireAuth, async (req, res) => {
   const { year, total_seats, occupied_seats } = req.body;
   await pool.query(
     `INSERT INTO enrollment_stats (year, total_seats, occupied_seats, updated_at) 
      VALUES ($1, $2, $3, NOW())`,
     [year, parseInt(total_seats) || 0, parseInt(occupied_seats) || 0]
   );
-  flash(req, 'success', 'Datele despre înscrieri au fost salvate!');
-  res.redirect('/admin/inscrieri');
+  flash(req, 'success', 'Datele despre admitere au fost salvate!');
+  res.redirect('/admin/admitere');
+});
+
+router.get('/inscrieri', requireAuth, (req, res) => {
+  res.redirect('/admin/admitere');
+});
+
+router.post('/inscrieri', requireAuth, (req, res) => {
+  res.redirect(307, '/admin/admitere');
 });
 
 // ── INFORMAȚII PUBLICE ───────────────────────────────────────────────────────
