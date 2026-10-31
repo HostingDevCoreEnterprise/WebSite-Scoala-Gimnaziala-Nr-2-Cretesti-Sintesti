@@ -20,6 +20,30 @@ app.use(express.json());
 // Trust proxy (pentru Railway/Heroku/Koyeb unde aplicatia este in spatele unui load balancer, altfel cookie-urile secure sunt ignorate)
 app.set('trust proxy', 1);
 
+// Health check endpoint (placed before session to avoid session store overhead for monitors)
+// Keeps Render awake and pings Aiven database to prevent idle power-offs
+const { startKeepAlive, pingDatabase } = require('./db/keepAlive');
+app.get('/health', async (req, res) => {
+  const result = await pingDatabase();
+  if (result.success) {
+    return res.status(200).json({
+      status: 'ok',
+      db: 'connected',
+      latencyMs: result.duration,
+      uptimeSec: Math.floor(process.uptime()),
+      timestamp: new Date().toISOString()
+    });
+  } else {
+    return res.status(503).json({
+      status: 'error',
+      db: 'disconnected',
+      error: result.error,
+      uptimeSec: Math.floor(process.uptime()),
+      timestamp: new Date().toISOString()
+    });
+  }
+});
+
 // Session
 const pgSession = require('connect-pg-simple')(session);
 const pool = require('./db/pool');
@@ -96,4 +120,7 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`  Server pornit la http://localhost:${PORT}`);
+  const keepAliveInterval = parseInt(process.env.KEEP_ALIVE_INTERVAL_MINUTES || '5', 10);
+  startKeepAlive(keepAliveInterval);
 });
+
