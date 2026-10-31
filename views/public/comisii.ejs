@@ -13,6 +13,12 @@
   <section class="section">
     <div class="container">
 
+      <!-- Subnavigation Profesori -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 40px;">
+        <a href="/profesori" class="btn btn-secondary">‍ Despre Profesori</a>
+        <a href="/comisii" class="btn btn-primary"> Comisii</a>
+      </div>
+
       <% if (commissions.length === 0 && tab !== 'despre') { %>
       <div class="empty-state reveal">
         <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="8" y="8" width="48" height="48" rx="6"/><path d="M20 24h24M20 32h16M20 40h12"/></svg>

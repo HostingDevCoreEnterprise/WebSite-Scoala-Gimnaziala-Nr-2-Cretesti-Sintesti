@@ -10,10 +10,20 @@
   </section>
 
   <section class="section">
-    <div class="container" style="max-width: 800px;">
+    <div class="container" style="max-width: 860px;">
       
+      <!-- Subnavigation Elevi -->
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 45px;">
+        <a href="/elevi" class="btn btn-secondary"> Despre Elevi</a>
+        <a href="/admitere" class="btn btn-secondary"> Admitere</a>
+        <a href="/statutul-elevului" class="btn btn-secondary"> Statutul Elevului</a>
+        <a href="/activitati-extra" class="btn btn-secondary"> Activități Extracuriculare</a>
+        <a href="/absolvire" class="btn btn-secondary"> Absolvire</a>
+        <a href="/evaluare-nationala" class="btn btn-primary"> Evaluare Națională</a>
+      </div>
+
       <!-- Meniu Selectie Clasa -->
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 40px;">
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-bottom: 35px; background: var(--p50); padding: 12px; border-radius: var(--r-xl);">
         <a href="/evaluare-nationala?tab=2" class="btn <%= tab === '2' ? 'btn-primary' : 'btn-secondary' %>">Clasa a II-a</a>
         <a href="/evaluare-nationala?tab=4" class="btn <%= tab === '4' ? 'btn-primary' : 'btn-secondary' %>">Clasa a IV-a</a>
         <a href="/evaluare-nationala?tab=6" class="btn <%= tab === '6' ? 'btn-primary' : 'btn-secondary' %>">Clasa a VI-a</a>
