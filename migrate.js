@@ -38,6 +38,12 @@ async function migrate() {
       WHERE name = 'Management' OR slug = 'management'
     `);
 
+    // Remove obsolete 'Documente Generale' section
+    await pool.query(`
+      DELETE FROM public_document_sections 
+      WHERE slug = 'documente-generale' OR name ILIKE '%documente generale%'
+    `);
+
     // 2. Ensure 'Management și Calitate' exists
     const mngCheck = await pool.query(`SELECT id FROM public_document_sections WHERE name = 'Management și Calitate' OR slug = 'management-si-calitate' LIMIT 1`);
     if (mngCheck.rows.length === 0) {
