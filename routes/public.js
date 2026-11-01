@@ -185,20 +185,35 @@ router.get('/elevi', async (req, res, next) => {
   } catch (err) { next(err); }
 });
 
-router.get('/admitere', async (req, res, next) => {
+router.get('/inscriere', async (req, res, next) => {
   try {
     const settings = await getSettings();
     const { rows } = await pool.query(`SELECT * FROM enrollment_stats ORDER BY id DESC LIMIT 1`);
-    res.render('public/admitere', { 
-      title: 'Admitere — ' + (settings.school_name || ''), 
+    res.render('public/inscriere', { 
+      title: 'Înscriere — ' + (settings.school_name || ''), 
       settings, 
       stats: rows[0] || null,
-      currentPage: 'admitere'
+      currentPage: 'inscriere'
     });
   } catch (err) { next(err); }
 });
 
 router.get('/inscrieri', (req, res) => {
+  res.redirect(301, '/inscriere');
+});
+
+router.get('/admitere', async (req, res, next) => {
+  try {
+    const settings = await getSettings();
+    res.render('public/admitere', { 
+      title: 'Admitere Liceu — ' + (settings.school_name || ''), 
+      settings, 
+      currentPage: 'admitere'
+    });
+  } catch (err) { next(err); }
+});
+
+router.get('/admitere-liceu', (req, res) => {
   res.redirect(301, '/admitere');
 });
 

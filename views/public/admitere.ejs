@@ -1,155 +1,244 @@
 <%- include('../partials/head') %>
 <%- include('../partials/header', { currentPage: 'admitere' }) %>
 
+<style>
+  .subnav-elevi {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 40px;
+  }
+  .subnav-elevi .btn {
+    font-size: 0.95rem;
+    padding: 8px 18px;
+    border-radius: 999px;
+  }
+  .card-responsive {
+    padding: 30px;
+  }
+  .doc-hero-card {
+    background: linear-gradient(135deg, rgba(29, 78, 216, 0.08), rgba(30, 64, 175, 0.03));
+    border: 1px solid var(--p200);
+    border-radius: var(--r-xl);
+    padding: 35px 30px;
+    margin-bottom: 40px;
+    box-shadow: var(--sh-md);
+  }
+  .steps-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  @media (max-width: 768px) {
+    .subnav-elevi {
+      gap: 8px;
+      margin-bottom: 30px;
+    }
+    .subnav-elevi .btn {
+      font-size: 0.85rem;
+      padding: 6px 14px;
+    }
+    .card-responsive {
+      padding: 20px 16px;
+    }
+    .doc-hero-card {
+      padding: 24px 18px;
+    }
+    .steps-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+    }
+  }
+</style>
+
 <main>
-  <section class="page-header" style="background: linear-gradient(135deg, var(--p800), var(--p900)); color: white; padding: 100px 0 60px;">
+  <section class="page-header" style="background: linear-gradient(135deg, var(--p800), var(--p900)); color: white; padding: 90px 0 50px;">
     <div class="container text-center">
-      <h1 class="reveal">Procedură de Admitere</h1>
-      <p class="reveal reveal-delay-1" style="font-size: 1.25rem; opacity: 0.9; max-width: 650px; margin: 20px auto 0;">
-        Informații oficiale privind admiterea și înscrierea elevilor pentru anul școlar <%= stats ? stats.year : 'curent' %>
+      <h1 class="reveal" style="font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800;">Admitere în Învățământul Liceal</h1>
+      <p class="reveal reveal-delay-1" style="font-size: 1.15rem; opacity: 0.9; max-width: 700px; margin: 16px auto 0; line-height: 1.6;">
+        Calendarul oficial, etapele repartizării computerizate și ghidul complet pentru admiterea absolvenților clasei a VIII-a la liceu
       </p>
     </div>
   </section>
 
   <section class="section">
-    <div class="container" style="max-width: 860px;">
+    <div class="container" style="max-width: 900px;">
 
       <!-- Subnavigation Elevi -->
-      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; margin-bottom: 45px;">
-        <a href="/elevi" class="btn btn-secondary"> Despre Elevi</a>
-        <a href="/admitere" class="btn btn-primary"> Admitere</a>
-        <a href="/statutul-elevului" class="btn btn-secondary"> Statutul Elevului</a>
-        <a href="/activitati-extra" class="btn btn-secondary"> Activități Extracuriculare</a>
-        <a href="/absolvire" class="btn btn-secondary"> Absolvire</a>
-        <a href="/evaluare-nationala" class="btn btn-secondary"> Evaluare Națională</a>
+      <div class="subnav-elevi">
+        <a href="/elevi" class="btn btn-secondary">Despre Elevi</a>
+        <a href="/inscriere" class="btn btn-secondary">Înscriere</a>
+        <a href="/admitere" class="btn btn-primary">Admitere Liceu</a>
+        <a href="/statutul-elevului" class="btn btn-secondary">Statutul Elevului</a>
+        <a href="/activitati-extra" class="btn btn-secondary">Activități Extracuriculare</a>
+        <a href="/absolvire" class="btn btn-secondary">Absolvire</a>
+        <a href="/evaluare-nationala" class="btn btn-secondary">Evaluare Națională</a>
       </div>
-      
-      <% if (stats) { %>
-      <style>
-        .admitere-stats {
-          display: flex; 
-          justify-content: center; 
-          gap: 40px; 
-          margin-bottom: 45px; 
-          background: white; 
-          padding: 30px; 
-          border-radius: var(--r-xl); 
-          box-shadow: var(--sh-md);
-          border: 1px solid var(--p100);
-        }
-        .admitere-stats-divider {
-          width: 2px; 
-          background: var(--p100);
-        }
-        @media (max-width: 768px) {
-          .admitere-stats {
-            flex-direction: column;
-            gap: 20px;
-            padding: 20px;
-          }
-          .admitere-stats-divider {
-            width: 100%;
-            height: 2px;
-          }
-        }
-      </style>
-      <div class="admitere-stats">
-        <div style="text-align: center;">
-          <div style="font-size: 3rem; font-weight: 900; color: var(--p600);"><%= stats.total_seats %></div>
-          <div style="font-size: 0.95rem; color: var(--text2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Locuri Totale</div>
-        </div>
-        <div class="admitere-stats-divider"></div>
-        <div style="text-align: center;">
-          <div style="font-size: 3rem; font-weight: 900; color: var(--s500);"><%= stats.occupied_seats %></div>
-          <div style="font-size: 0.95rem; color: var(--text2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Locuri Ocupate</div>
-        </div>
-        <div class="admitere-stats-divider"></div>
-        <div style="text-align: center;">
-          <div style="font-size: 3rem; font-weight: 900; color: var(--success, #10b981);"><%= Math.max(0, stats.total_seats - stats.occupied_seats) %></div>
-          <div style="font-size: 0.95rem; color: var(--text2); font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;">Locuri Libere</div>
-        </div>
-      </div>
-      <% } %>
 
-      <!-- Circumscripție -->
-      <div class="card" style="margin-bottom: 25px; border-radius: var(--r-lg); border-left: 5px solid var(--p600);">
-        <div class="card-body" style="padding: 30px;">
-          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <!-- Ordinul de Ministru - Document Oficial -->
+      <div class="doc-hero-card">
+        <div style="display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 24px;">
+          <div style="flex: 1 1 500px;">
+            <div style="display: inline-flex; align-items: center; gap: 8px; background: var(--p100); color: var(--p800); padding: 6px 14px; border-radius: 999px; font-size: 0.85rem; font-weight: 700; margin-bottom: 12px;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 16px; height: 16px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+              ORDINUL M.E.C. NR. 5831 / 19.10.2026
             </div>
-            <h2 style="color: var(--p800); margin: 0; font-size: 1.4rem; font-weight: 700;">
-              Elevii din circumscripția școlii
+            <h2 style="color: var(--p900); font-size: clamp(1.25rem, 3vw, 1.55rem); font-weight: 800; margin-bottom: 10px; line-height: 1.35;">
+              Calendarul de Desfășurare a Repartizării și Admiterii în Învățământul Liceal
+            </h2>
+            <p style="color: var(--text2); line-height: 1.6; font-size: 0.98rem; margin: 0 0 18px;">
+              Documentul oficial aprobat de Ministerul Educației și Cercetării ce reglementează calendarul detaliat, etapele de completare a fișelor de opțiuni, validarea datelor și algoritmul repartizării computerizate la nivel național pentru anul școlar 2027–2028.
+            </p>
+            <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+              <a href="/documents/OMEC%205831_CALENDAR%20INSCRIERE%20LICEU.pdf" target="_blank" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 10px 22px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                <span>Deschide Ordinul Oficial (PDF)</span>
+              </a>
+              <a href="/documents/OMEC%205831_CALENDAR%20INSCRIERE%20LICEU.pdf" download class="btn btn-secondary" style="display: inline-flex; align-items: center; gap: 8px; border-radius: 999px; padding: 10px 20px;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 18px; height: 18px;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+                <span>Descarcă PDF</span>
+              </a>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: center;">
+            <div style="width: 80px; height: 80px; border-radius: 20px; background: white; box-shadow: var(--sh-md); display: flex; align-items: center; justify-content: center; color: var(--p600);">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="width: 44px; height: 44px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Calculul Mediei de Admitere -->
+      <div class="card" style="margin-bottom: 35px; border-radius: var(--r-xl); border-left: 6px solid var(--p600); box-shadow: var(--sh-md);">
+        <div class="card-responsive">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 14px;">
+            <div style="width: 40px; height: 40px; border-radius: 10px; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px;"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="16" y1="14" x2="16" y2="18"/><path d="M16 10h.01"/><path d="M12 10h.01"/><path d="M8 10h.01"/><path d="M12 14h.01"/><path d="M8 14h.01"/><path d="M12 18h.01"/><path d="M8 18h.01"/></svg>
+            </div>
+            <h2 style="color: var(--p800); margin: 0; font-size: 1.4rem; font-weight: 800;">
+              Cum se Calculează Media de Admitere
             </h2>
           </div>
-          <p style="color: var(--text); line-height: 1.7; font-size: 1.05rem;">
-            Toți copiii care au domiciliul în perimetrul (circumscripția) arondat Școlii Gimnaziale Nr. 2 Crețești au locul asigurat conform normelor Ministerului Educației. Părintele sau tutorele legal se prezintă la <strong>secretariatul școlii</strong> cu actele de identitate și certificatul de naștere al copilului pentru completarea cererii-tip de înscriere.
+          <p style="color: var(--text); line-height: 1.7; font-size: 1.02rem; margin-bottom: 16px;">
+            Conform metodologiei Ministerului Educației, <strong>Media de Admitere</strong> în învățământul liceal de stat se calculează exclusiv pe baza rezultatelor obținute la Evaluarea Națională:
+          </p>
+          <div style="background: var(--p50); border: 1px solid var(--p200); border-radius: var(--r-lg); padding: 18px 24px; text-align: center; margin-bottom: 16px;">
+            <span style="font-size: 1.3rem; font-weight: 800; color: var(--p800); display: block; margin-bottom: 6px;">
+              Media de Admitere = Media Generală la Evaluarea Națională (100%)
+            </span>
+            <span style="color: var(--text2); font-size: 0.95rem;">
+              Media aritmetică, cu două zecimale, fără rotunjire, a notelor obținute la probele scrise (Limba Română și Matematică).
+            </span>
+          </div>
+          <p style="color: var(--text2); line-height: 1.6; font-size: 0.96rem; margin: 0;">
+            <strong>Criterii de departajare:</strong> În cazul în care doi sau mai mulți candidați au medii de admitere egale, aceștia vor fi departajați folosind în ordine: media generală de absolvire a claselor V–VIII, nota la proba de Limba și literatura română din cadrul Evaluării Naționale, respectiv nota la proba de Matematică.
           </p>
         </div>
       </div>
 
-      <!-- În afara circumscripției -->
-      <div class="card" style="margin-bottom: 25px; border-radius: var(--r-lg); border-left: 5px solid var(--s500);">
-        <div class="card-body" style="padding: 30px;">
-          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: rgba(245, 158, 11, 0.15); color: var(--s600, #d97706); display: flex; align-items: center; justify-content: center;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      <!-- Etapele Repartizării Computerizate -->
+      <div style="margin-bottom: 40px;">
+        <div style="text-align: center; margin-bottom: 28px;">
+          <h2 style="color: var(--p800); font-size: clamp(1.5rem, 3.5vw, 1.85rem); font-weight: 800; margin: 0;">
+            Etapele Repartizării Computerizate
+          </h2>
+          <p style="color: var(--text2); margin-top: 8px; font-size: 1.02rem;">Pașii necesari pentru admiterea la liceu a absolvenților clasei a VIII-a</p>
+        </div>
+
+        <div class="steps-grid">
+          
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; border-top: 4px solid var(--p600); box-shadow: var(--sh-md);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--p600); text-transform: uppercase; letter-spacing: 0.5px;">Pasul 1</span>
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">1</div>
             </div>
-            <h2 style="color: var(--p800); margin: 0; font-size: 1.4rem; font-weight: 700;">
-              Elevii din afara circumscripției
-            </h2>
+            <h3 style="color: var(--p800); font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;">Completarea Fișei de Opțiuni</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Elevii și părinții completează fișele de înscriere la secretariatul școlii, asistați de profesorii diriginți. Se trec codurile liceelor și ale profilurilor dorite.
+            </p>
           </div>
-          <p style="color: var(--text); line-height: 1.7; font-size: 1.05rem;">
-            Pentru elevii care domiciliază în alte localități sau circumscripții, admiterea se realizează în a doua etapă, în limita locurilor rămase disponibile. Dosarele depuse sunt analizate și aprobate de <strong>Consiliul de Administrație</strong> al școlii pe baza criteriilor generale și specifice de departajare.
-          </p>
+
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; border-top: 4px solid var(--s500); box-shadow: var(--sh-md);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--s500); text-transform: uppercase; letter-spacing: 0.5px;">Pasul 2</span>
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(245, 158, 11, 0.15); color: var(--s600, #d97706); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">2</div>
+            </div>
+            <h3 style="color: var(--p800); font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;">Verificarea Fișei Martor</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Datele introduse în sistemul național informatic sunt tipărite pe fișa martor. Părintele și candidatul verifică și semnează pentru conformitate.
+            </p>
+          </div>
+
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; border-top: 4px solid var(--success, #10b981); box-shadow: var(--sh-md);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: var(--success, #10b981); text-transform: uppercase; letter-spacing: 0.5px;">Pasul 3</span>
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(16, 185, 129, 0.1); color: var(--success, #10b981); display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">3</div>
+            </div>
+            <h3 style="color: var(--p800); font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;">Repartizarea Computerizată</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Aplicația națională repartizează candidații descrescător în funcție de media de admitere și ordinea opțiunilor exprimate pe fișă.
+            </p>
+          </div>
+
+          <div class="card" style="border-radius: var(--r-lg); padding: 24px; border-top: 4px solid #9333ea; box-shadow: var(--sh-md);">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px;">
+              <span style="font-size: 0.85rem; font-weight: 700; color: #9333ea; text-transform: uppercase; letter-spacing: 0.5px;">Pasul 4</span>
+              <div style="width: 32px; height: 32px; border-radius: 50%; background: rgba(147, 51, 234, 0.1); color: #9333ea; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.9rem;">4</div>
+            </div>
+            <h3 style="color: var(--p800); font-size: 1.15rem; font-weight: 700; margin-bottom: 10px;">Depunerea Dosarului la Liceu</h3>
+            <p style="color: var(--text2); font-size: 0.95rem; line-height: 1.6; margin: 0;">
+              Depunerea dosarului complet de înscriere la secretariatul unității de învățământ liceal la care candidatul a fost repartizat.
+            </p>
+          </div>
+
         </div>
       </div>
 
-      <!-- Documente necesare la înscriere -->
-      <div class="card" style="margin-bottom: 35px; border-radius: var(--r-lg);">
-        <div class="card-body" style="padding: 30px;">
-          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-            <div style="width: 36px; height: 36px; border-radius: 8px; background: var(--p100); color: var(--p700); display: flex; align-items: center; justify-content: center;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 20px; height: 20px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      <!-- Sfaturi Importante pentru Completarea Opțiunilor -->
+      <div class="card" style="margin-bottom: 35px; border-radius: var(--r-xl); padding: 30px; box-shadow: var(--sh-md);">
+        <h3 style="color: var(--p800); font-size: 1.3rem; font-weight: 800; margin-bottom: 18px; display: flex; align-items: center; gap: 10px;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width: 22px; height: 22px; color: var(--s500);"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          Recomandări Esențiale pentru Completarea Opțiunilor
+        </h3>
+        <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 14px; color: var(--text); font-size: 1rem;">
+          <li style="display: flex; gap: 12px; align-items: flex-start;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--success, #10b981)" stroke-width="2.5" style="width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"/></svg>
+            <div>
+              <strong>Completați un număr suficient de opțiuni:</strong>
+              <span style="color: var(--text2);"> Nu vă limitați la 2-3 opțiuni! Completarea unui număr generos de opțiuni previne riscul de a rămâne nerepartizat în prima etapă.</span>
             </div>
-            <h2 style="color: var(--p800); margin: 0; font-size: 1.4rem; font-weight: 700;">
-              Documente Necesare pentru Dosarul de Admitere
-            </h2>
-          </div>
-          <ul style="list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; color: var(--text); font-size: 1.05rem;">
-            <li style="display: flex; align-items: flex-start; gap: 10px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--success, #10b981)" stroke-width="2.5" style="width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Cerere-tip de înscriere (disponibilă la secretariatul școlii sau la secțiunea Informații Publice)</span>
-            </li>
-            <li style="display: flex; align-items: flex-start; gap: 10px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--success, #10b981)" stroke-width="2.5" style="width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Copie și original după certificatul de naștere al copilului</span>
-            </li>
-            <li style="display: flex; align-items: flex-start; gap: 10px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--success, #10b981)" stroke-width="2.5" style="width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Copii după actele de identitate ale părinților / tutorilor legali</span>
-            </li>
-            <li style="display: flex; align-items: flex-start; gap: 10px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--success, #10b981)" stroke-width="2.5" style="width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Adeverință medicală și fișa de vaccinări eliberate de medicul de familie</span>
-            </li>
-            <li style="display: flex; align-items: flex-start; gap: 10px;">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--success, #10b981)" stroke-width="2.5" style="width: 20px; height: 20px; flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"/></svg>
-              <span>Documente justificative suplimentare (dacă este cazul: recomandare CJRAE, acte tutelă)</span>
-            </li>
-          </ul>
-        </div>
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--success, #10b981)" stroke-width="2.5" style="width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"/></svg>
+            <div>
+              <strong>Ordonarea în funcție de preferințe reale:</strong>
+              <span style="color: var(--text2);"> Sistemul computerizat parcurge fișa de sus în jos. Prima opțiune la care media vă permite accesul este cea confirmată definitiv.</span>
+            </div>
+          </li>
+          <li style="display: flex; gap: 12px; align-items: flex-start;">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--success, #10b981)" stroke-width="2.5" style="width: 18px; height: 18px; flex-shrink: 0; margin-top: 3px;"><polyline points="20 6 9 17 4 12"/></svg>
+            <div>
+              <strong>Atenție maximă la codurile liceelor:</strong>
+              <span style="color: var(--text2);"> Verificați fiecare cod din broșura oficială a admiterii pentru județul Ilfov și Municipiul București pentru a evita confuzia profilurilor.</span>
+            </div>
+          </li>
+        </ul>
       </div>
 
-      <!-- Contact direct -->
-      <div style="background: var(--p50); border: 1px dashed var(--p300); border-radius: var(--r-lg); padding: 25px; text-align: center;">
-        <p style="color: var(--p900); font-size: 1.1rem; font-weight: 600; margin-bottom: 8px;">
-          Aveți întrebări despre calendar sau documente?
+      <!-- Suport Școala Crețești -->
+      <div style="background: var(--p50); border: 1px dashed var(--p300); border-radius: var(--r-xl); padding: 28px; text-align: center;">
+        <h4 style="color: var(--p900); font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">
+          Suntem alături de elevii și părinții noștri!
+        </h4>
+        <p style="color: var(--text2); margin-bottom: 18px; max-width: 600px; margin-left: auto; margin-right: auto; line-height: 1.6; font-size: 0.98rem;">
+          Profesorii diriginți ai claselor a VIII-a și conducerea Școlii Gimnaziale Nr. 2 Crețești asigură asistență completă la completarea fișelor de opțiuni și consiliere vocațională.
         </p>
-        <p style="color: var(--text2); margin-bottom: 18px;">
-          Echipa secretariatului nostru vă stă la dispoziție în timpul programului de lucru.
-        </p>
-        <a href="/contact" class="btn btn-secondary">Contactează Secretariatul</a>
+        <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 12px;">
+          <a href="/evaluare-nationala" class="btn btn-secondary" style="border-radius: 999px;">Calendar Evaluare Națională</a>
+          <a href="/contact" class="btn btn-primary" style="border-radius: 999px;">Contact Secretariat</a>
+        </div>
       </div>
 
     </div>

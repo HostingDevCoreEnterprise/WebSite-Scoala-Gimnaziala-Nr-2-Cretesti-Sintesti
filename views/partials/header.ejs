@@ -24,7 +24,7 @@
       </li>
       <li class="nav-item">
         <a href="#"
-          class="nav-link <%= ['elevi', 'admitere', 'inscrieri', 'statutul-elevului', 'activitati-extra', 'absolvire', 'evaluare-nationala'].includes(currentPage) ? 'active' : '' %>">
+          class="nav-link <%= ['elevi', 'inscriere', 'admitere', 'inscrieri', 'statutul-elevului', 'activitati-extra', 'absolvire', 'evaluare-nationala'].includes(currentPage) ? 'active' : '' %>">
           Elevi
           <svg viewBox="0 0 20 20" fill="currentColor">
             <path fill-rule="evenodd"
@@ -34,7 +34,8 @@
         </a>
         <div class="nav-dropdown">
           <a href="/elevi" class="dropdown-link"> Despre Elevi</a>
-          <a href="/admitere" class="dropdown-link"> Admitere</a>
+          <a href="/inscriere" class="dropdown-link"> Înscriere</a>
+          <a href="/admitere" class="dropdown-link"> Admitere Liceu</a>
           <a href="/statutul-elevului" class="dropdown-link"> Statutul Elevului</a>
           <a href="/activitati-extra" class="dropdown-link"> Activități Extracuriculare</a>
           <a href="/absolvire" class="dropdown-link"> Absolvire</a>
@@ -95,7 +96,7 @@
 
     <div class="nav-mobile-accordion">
       <button
-        class="nav-mobile-link nav-mobile-toggle <%= ['elevi', 'admitere', 'inscrieri', 'statutul-elevului', 'activitati-extra', 'absolvire', 'evaluare-nationala'].includes(currentPage) ? 'active' : '' %>"
+        class="nav-mobile-link nav-mobile-toggle <%= ['elevi', 'inscriere', 'admitere', 'inscrieri', 'statutul-elevului', 'activitati-extra', 'absolvire', 'evaluare-nationala'].includes(currentPage) ? 'active' : '' %>"
         style="width: 100%; text-align: left; display: flex; justify-content: space-between; align-items: center;">
         Elevi
         <svg viewBox="0 0 20 20" fill="currentColor" style="width: 16px; height: 16px; transition: transform 0.2s;">
@@ -106,7 +107,8 @@
       </button>
       <div class="nav-mobile-sub" style="display: none;">
         <a href="/elevi" class="nav-mobile-link">Despre Elevi</a>
-        <a href="/admitere" class="nav-mobile-link">Admitere</a>
+        <a href="/inscriere" class="nav-mobile-link">Înscriere</a>
+        <a href="/admitere" class="nav-mobile-link">Admitere Liceu</a>
         <a href="/statutul-elevului" class="nav-mobile-link">Statutul Elevului</a>
         <a href="/activitati-extra" class="nav-mobile-link">Activități Extracuriculare</a>
         <a href="/absolvire" class="nav-mobile-link">Absolvire</a>
